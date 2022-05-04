@@ -6,22 +6,33 @@ namespace bellatrix
     public partial class Bellatrix : Form
     {
         DataManager dataManager = new();
+        List<Command> LoadedCommands = new();
+        List<Script> LoadedScripts = new();
+        List<Command> LoadedScriptCommands = new();
+
         public Bellatrix()
         {
             InitializeComponent();
         }
 
-        // test data
+        // test devices
         List<Device> fakedevices = new();
-        List<Command> fakecommands = new();
-        List<Script> fakescripts = new();
 
         private void Bellatrix_Load(object sender, EventArgs e)
         {
             // get version info for label
             BellatrixLabel.Text = $"Bellatrix (v{Assembly.GetEntryAssembly()?.GetName().Version})";
-            
-            // test data
+
+            // check to see if files exist, and create default files if they dont
+            dataManager.FileCheck();
+
+            // load files
+            LoadedCommands = dataManager.LoadCommands();
+            RefreshCommandsButton.PerformClick();
+            LoadedScripts = dataManager.LoadScripts();
+            RefreshScriptsButton.PerformClick();
+
+            // test devices
             Device device1 = new("COM01");
             fakedevices.Add(device1);
             Device device2 = new("COM02");
@@ -32,18 +43,6 @@ namespace bellatrix
             fakedevices.Add(device4);
             Device device5 = new("COM05");
             fakedevices.Add(device5);
-            Command command1 = new("test1", "gkdjfsgkjsdhflkgjhsdjfkgh");
-            fakecommands.Add(command1);
-            Command command2 = new("test2", "84u8f934hfuhersuhfgsdhgfjk");
-            fakecommands.Add(command2);
-            Command command3 = new("test3", "kvmnvbmnjfghdefghriuewhgiuhweg");
-            fakecommands.Add(command3);
-            Script script1 = new("test1", "gkdjfsgkjsdhflkgjhsdjfkgh");
-            fakescripts.Add(script1);
-            Script script2 = new("test2", "84u8f934hfuhersuhfgsdhgfjk");
-            fakescripts.Add(script2);
-            Script script3 = new("test3", "kvmnvbmnjfghdefghriuewhgiuhweg");
-            fakescripts.Add(script3);
         }
 
         private void RefreshDevicesButton_Click(object sender, EventArgs e)
@@ -57,21 +56,21 @@ namespace bellatrix
 
         private void RefreshCommandsButton_Click(object sender, EventArgs e)
         {
-            CommandsDataGrid.DataSource = fakecommands;
+            CommandsDataGrid.DataSource = LoadedCommands;
             CommandsDataGrid.Columns["Instruction"].HeaderText = "Command";
             CommandsDataGrid.Columns["Delay"].Visible = false;
         }
 
         private void RefreshScriptsButton_Click(object sender, EventArgs e)
         {
-            ScriptsDataGrid.DataSource = fakescripts;
+            ScriptsDataGrid.DataSource = LoadedScripts;
             ScriptsDataGrid.Columns["Name"].HeaderText = "Script";
         }
 
         private void CommandsDataGrid_SelectionChanged(object sender, EventArgs e)
         {
             int rowindex = CommandsDataGrid.CurrentCell.RowIndex;
-            foreach (var item in fakecommands)
+            foreach (var item in LoadedCommands)
             {
                 if (item.Instruction == CommandsDataGrid["Instruction", rowindex].Value.ToString())
                 {
@@ -84,26 +83,27 @@ namespace bellatrix
         private void ScriptsDataGrid_SelectionChanged(object sender, EventArgs e)
         {
             int rowindex = ScriptsDataGrid.CurrentCell.RowIndex;
-            foreach (var item in fakescripts)
+            foreach (var item in LoadedScripts)
             {
                 if (item.Name == ScriptsDataGrid["Name", rowindex].Value.ToString())
                 {
                     ScriptTextBox.Text = item.Name;
                     ScriptDescTextBox.Text = item.Description;
+                    ScriptCommandsDataGrid.DataSource = item.Commands;
                 }
             }
         }
 
         private void SaveCommandButton_Click(object sender, EventArgs e)
         {
-            Command command = new(CommandTextBox.Text, CommandDescTextBox.Text);
-            dataManager.AddCommand(command);
+            //Command command = new(CommandTextBox.Text, CommandDescTextBox.Text);
+            //dataManager.AddCommand(command);
         }
 
         private void SaveScriptButton_Click(object sender, EventArgs e)
         {
-            Script script = new(ScriptTextBox.Text, ScriptDescTextBox.Text);
-            dataManager.AddScript(script);
+            //Script script = new(ScriptTextBox.Text, ScriptDescTextBox.Text);
+            //dataManager.AddScript(script);
         }
     }
 }

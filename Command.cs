@@ -11,5 +11,12 @@
             Instruction = instruction;
             Description = description;
         }
+
+        internal Command(string instruction, string description, int delay)
+        {
+            Instruction = instruction;
+            Description = description;
+            Delay = delay;
+        }
     }
 }
