@@ -58,6 +58,8 @@
             this.ConsoleLabel = new System.Windows.Forms.Label();
             this.CommandLineTextBox = new System.Windows.Forms.TextBox();
             this.SendCommandButton = new System.Windows.Forms.Button();
+            this.RefreshCommandsButton = new System.Windows.Forms.Button();
+            this.RefreshScriptsButton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.DevicesDataGrid)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.CommandsDataGrid)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ScriptCommandsDataGrid)).BeginInit();
@@ -134,6 +136,7 @@
             this.CommandsDataGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.CommandsDataGrid.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
             this.CommandsDataGrid.Location = new System.Drawing.Point(484, 304);
+            this.CommandsDataGrid.MultiSelect = false;
             this.CommandsDataGrid.Name = "CommandsDataGrid";
             this.CommandsDataGrid.ReadOnly = true;
             this.CommandsDataGrid.RowHeadersVisible = false;
@@ -141,8 +144,9 @@
             this.CommandsDataGrid.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.CommandsDataGrid.ShowCellToolTips = false;
             this.CommandsDataGrid.ShowEditingIcon = false;
-            this.CommandsDataGrid.Size = new System.Drawing.Size(252, 206);
+            this.CommandsDataGrid.Size = new System.Drawing.Size(252, 165);
             this.CommandsDataGrid.TabIndex = 1;
+            this.CommandsDataGrid.SelectionChanged += new System.EventHandler(this.CommandsDataGrid_SelectionChanged);
             // 
             // NewCommandButton
             // 
@@ -155,7 +159,7 @@
             // 
             // DeleteCommandButton
             // 
-            this.DeleteCommandButton.Location = new System.Drawing.Point(661, 275);
+            this.DeleteCommandButton.Location = new System.Drawing.Point(484, 475);
             this.DeleteCommandButton.Name = "DeleteCommandButton";
             this.DeleteCommandButton.Size = new System.Drawing.Size(75, 23);
             this.DeleteCommandButton.TabIndex = 3;
@@ -170,6 +174,7 @@
             this.SaveCommandButton.TabIndex = 3;
             this.SaveCommandButton.Text = "Save";
             this.SaveCommandButton.UseVisualStyleBackColor = true;
+            this.SaveCommandButton.Click += new System.EventHandler(this.SaveCommandButton_Click);
             // 
             // RunCommandButton
             // 
@@ -294,7 +299,7 @@
             // 
             // DeleteScriptButton
             // 
-            this.DeleteScriptButton.Location = new System.Drawing.Point(919, 275);
+            this.DeleteScriptButton.Location = new System.Drawing.Point(742, 475);
             this.DeleteScriptButton.Name = "DeleteScriptButton";
             this.DeleteScriptButton.Size = new System.Drawing.Size(75, 23);
             this.DeleteScriptButton.TabIndex = 3;
@@ -309,6 +314,7 @@
             this.SaveScriptButton.TabIndex = 3;
             this.SaveScriptButton.Text = "Save";
             this.SaveScriptButton.UseVisualStyleBackColor = true;
+            this.SaveScriptButton.Click += new System.EventHandler(this.SaveScriptButton_Click);
             // 
             // RunScriptButton
             // 
@@ -336,6 +342,7 @@
             this.ScriptsDataGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.ScriptsDataGrid.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
             this.ScriptsDataGrid.Location = new System.Drawing.Point(742, 304);
+            this.ScriptsDataGrid.MultiSelect = false;
             this.ScriptsDataGrid.Name = "ScriptsDataGrid";
             this.ScriptsDataGrid.ReadOnly = true;
             this.ScriptsDataGrid.RowHeadersVisible = false;
@@ -343,8 +350,9 @@
             this.ScriptsDataGrid.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.ScriptsDataGrid.ShowCellToolTips = false;
             this.ScriptsDataGrid.ShowEditingIcon = false;
-            this.ScriptsDataGrid.Size = new System.Drawing.Size(252, 206);
+            this.ScriptsDataGrid.Size = new System.Drawing.Size(252, 165);
             this.ScriptsDataGrid.TabIndex = 1;
+            this.ScriptsDataGrid.SelectionChanged += new System.EventHandler(this.ScriptsDataGrid_SelectionChanged);
             // 
             // ConsoleTextBox
             // 
@@ -380,6 +388,26 @@
             this.SendCommandButton.Text = "Send";
             this.SendCommandButton.UseVisualStyleBackColor = true;
             // 
+            // RefreshCommandsButton
+            // 
+            this.RefreshCommandsButton.Location = new System.Drawing.Point(661, 275);
+            this.RefreshCommandsButton.Name = "RefreshCommandsButton";
+            this.RefreshCommandsButton.Size = new System.Drawing.Size(75, 23);
+            this.RefreshCommandsButton.TabIndex = 3;
+            this.RefreshCommandsButton.Text = "Refresh";
+            this.RefreshCommandsButton.UseVisualStyleBackColor = true;
+            this.RefreshCommandsButton.Click += new System.EventHandler(this.RefreshCommandsButton_Click);
+            // 
+            // RefreshScriptsButton
+            // 
+            this.RefreshScriptsButton.Location = new System.Drawing.Point(919, 275);
+            this.RefreshScriptsButton.Name = "RefreshScriptsButton";
+            this.RefreshScriptsButton.Size = new System.Drawing.Size(75, 23);
+            this.RefreshScriptsButton.TabIndex = 3;
+            this.RefreshScriptsButton.Text = "Refresh";
+            this.RefreshScriptsButton.UseVisualStyleBackColor = true;
+            this.RefreshScriptsButton.Click += new System.EventHandler(this.RefreshScriptsButton_Click);
+            // 
             // Bellatrix
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -399,6 +427,8 @@
             this.Controls.Add(this.DeleteCommandButton);
             this.Controls.Add(this.NewScriptButton);
             this.Controls.Add(this.SendCommandButton);
+            this.Controls.Add(this.RefreshScriptsButton);
+            this.Controls.Add(this.RefreshCommandsButton);
             this.Controls.Add(this.NewCommandButton);
             this.Controls.Add(this.RefreshDevicesButton);
             this.Controls.Add(this.ScriptCommandsDataGrid);
@@ -461,5 +491,7 @@
         private Label ConsoleLabel;
         private TextBox CommandLineTextBox;
         private Button SendCommandButton;
+        private Button RefreshCommandsButton;
+        private Button RefreshScriptsButton;
     }
 }
