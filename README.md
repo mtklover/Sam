@@ -4,6 +4,8 @@
 
 ### Samsung mobile device identification/functions using the Hayes command set, also known as the AT (Attention) command set.
 
+![Bellatrix](bellatrixteaser.PNG)
+
 ADB (USB Debugging) is not required for bellatrix, but some commands may not work if the screen is locked
 
 *MORE INFORMATION & SCREENSHOTS COMING SOON*
