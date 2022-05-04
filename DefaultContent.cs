@@ -16,7 +16,10 @@ namespace bellatrix
             new Command("AT+SVCIFPGM=1,4", "Check Network Lock"),
             new Command("AT+VERSNAME=3,2,3", "Check Android Version"),
             new Command("AT+SUDDLMOD=0,0", "Download Mode"),
-            new Command("AT+FACTORST=0,0", "Factory Reset")
+            new Command("AT+FACTORST=0,0", "Factory Reset"),
+            new Command("AT+CTSA=2,500,500", "Single Tap Screen"),
+            new Command("AT+CTSA=3,500,500", "Double Tap Screen"),
+            new Command("AT+CTSA=1,500,500;+CTSA=0,1000,1000", "Swipe Screen"),
         };
 
         public List<Script> DefaultScripts = new()

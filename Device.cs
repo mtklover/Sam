@@ -12,7 +12,7 @@ namespace bellatrix
         public string? ModelNo { get; set; }
         public string? Carrier { get; set; }
         public string? ActivationLock { get; set; }
-        public string? Storage { get; set; }
+        public string? StorageSize { get; set; }
         public string? NetworkLock { get; set; }
         public string? AndroidVersion { get; set; }
 

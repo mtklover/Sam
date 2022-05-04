@@ -36,5 +36,10 @@ namespace bellatrix
 
             return devices;
         }
+
+        internal void SendCommand(Device device)
+        {
+
+        }
     }
 }

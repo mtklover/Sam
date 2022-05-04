@@ -54,10 +54,13 @@ namespace bellatrix
 
             foreach (XElement element in document.Descendants("Command"))
             {
-                Command command = new Command(
+                if (element != null && element.Element != null && element.Element("Instruction") != null)
+                {
+                    Command command = new Command(
                     element.Element("Instruction").Value,
                     element.Element("Description").Value);
-                commands.Add(command);
+                    commands.Add(command);
+                }
             }
 
             return commands;
