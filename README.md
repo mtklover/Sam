@@ -24,6 +24,11 @@ ADB (USB Debugging) is not required for bellatrix, but some commands may not wor
 
 - Factory Reset (AT+FACTORST=0,0)
 
+- Touch Screen Emulation
+	- Single Tap (AT+CTSA=2,500,500)
+	- Double Tap (AT+CTSA=3,500,500)
+	- Swipe (AT+CTSA=1,500,500;+CTSA=0,1000,1000)
+
 *MORE COMING SOON*
 
 ### Included in default **"Scripts.xml"** file
