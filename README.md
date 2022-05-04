@@ -6,7 +6,7 @@
 
 ADB (USB Debugging) is not required for bellatrix, but some commands may not work if the screen is locked
 
-*MORE INFORMATION COMING SOON*
+*MORE INFORMATION & SCREENSHOTS COMING SOON*
 
 ### Included in default **"Commands.xml"** file
 
