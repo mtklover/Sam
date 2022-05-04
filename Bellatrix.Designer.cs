@@ -156,6 +156,7 @@
             this.NewCommandButton.TabIndex = 3;
             this.NewCommandButton.Text = "New";
             this.NewCommandButton.UseVisualStyleBackColor = true;
+            this.NewCommandButton.Click += new System.EventHandler(this.NewCommandButton_Click);
             // 
             // DeleteCommandButton
             // 
@@ -165,6 +166,7 @@
             this.DeleteCommandButton.TabIndex = 3;
             this.DeleteCommandButton.Text = "Delete";
             this.DeleteCommandButton.UseVisualStyleBackColor = true;
+            this.DeleteCommandButton.Click += new System.EventHandler(this.DeleteCommandButton_Click);
             // 
             // SaveCommandButton
             // 
@@ -296,6 +298,7 @@
             this.NewScriptButton.TabIndex = 3;
             this.NewScriptButton.Text = "New";
             this.NewScriptButton.UseVisualStyleBackColor = true;
+            this.NewScriptButton.Click += new System.EventHandler(this.NewScriptButton_Click);
             // 
             // DeleteScriptButton
             // 
@@ -305,6 +308,7 @@
             this.DeleteScriptButton.TabIndex = 3;
             this.DeleteScriptButton.Text = "Delete";
             this.DeleteScriptButton.UseVisualStyleBackColor = true;
+            this.DeleteScriptButton.Click += new System.EventHandler(this.DeleteScriptButton_Click);
             // 
             // SaveScriptButton
             // 

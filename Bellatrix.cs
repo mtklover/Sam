@@ -1,14 +1,13 @@
-using System.IO.Ports;
 using System.Reflection;
 
 namespace bellatrix
 {
     public partial class Bellatrix : Form
     {
-        DataManager dataManager = new();
-        List<Command> LoadedCommands = new();
-        List<Script> LoadedScripts = new();
-        List<Command> LoadedScriptCommands = new();
+        private DataManager dataManager = new();
+        private List<Command> LoadedCommands = new();
+        private List<Script> LoadedScripts = new();
+        private List<Command> LoadedScriptCommands = new();
 
         public Bellatrix()
         {
@@ -16,7 +15,7 @@ namespace bellatrix
         }
 
         // test devices
-        List<Device> fakedevices = new();
+        private List<Device> fakedevices = new();
 
         private void Bellatrix_Load(object sender, EventArgs e)
         {
@@ -52,19 +51,30 @@ namespace bellatrix
             DevicesDataGrid.Columns["PortConnection"].Visible = false;
             DevicesDataGrid.Columns["VID"].Visible = false;
             DevicesDataGrid.Columns["PID"].Visible = false;
+            DevicesDataGrid.ClearSelection();
         }
 
         private void RefreshCommandsButton_Click(object sender, EventArgs e)
         {
+            LoadedCommands = dataManager.LoadCommands();
             CommandsDataGrid.DataSource = LoadedCommands;
             CommandsDataGrid.Columns["Instruction"].HeaderText = "Command";
             CommandsDataGrid.Columns["Delay"].Visible = false;
+            CommandsDataGrid.ClearSelection();
+            CommandTextBox.Text = "";
+            CommandDescTextBox.Text = "";
         }
 
         private void RefreshScriptsButton_Click(object sender, EventArgs e)
         {
+            LoadedScripts = dataManager.LoadScripts();
             ScriptsDataGrid.DataSource = LoadedScripts;
             ScriptsDataGrid.Columns["Name"].HeaderText = "Script";
+            ScriptsDataGrid.ClearSelection();
+            LoadedScriptCommands.Clear();
+            ScriptCommandsDataGrid.DataSource = LoadedScriptCommands;
+            ScriptTextBox.Text = "";
+            ScriptDescTextBox.Text = "";
         }
 
         private void CommandsDataGrid_SelectionChanged(object sender, EventArgs e)
@@ -83,6 +93,7 @@ namespace bellatrix
         private void ScriptsDataGrid_SelectionChanged(object sender, EventArgs e)
         {
             int rowindex = ScriptsDataGrid.CurrentCell.RowIndex;
+
             foreach (var item in LoadedScripts)
             {
                 if (item.Name == ScriptsDataGrid["Name", rowindex].Value.ToString())
@@ -90,20 +101,59 @@ namespace bellatrix
                     ScriptTextBox.Text = item.Name;
                     ScriptDescTextBox.Text = item.Description;
                     ScriptCommandsDataGrid.DataSource = item.Commands;
+                    ScriptCommandsDataGrid.Columns["Description"].Visible = false;
                 }
             }
         }
 
         private void SaveCommandButton_Click(object sender, EventArgs e)
         {
-            //Command command = new(CommandTextBox.Text, CommandDescTextBox.Text);
-            //dataManager.AddCommand(command);
+            Command command = new(CommandTextBox.Text, CommandDescTextBox.Text);
+            dataManager.AddCommand(command);
+            RefreshCommandsButton.PerformClick();
         }
 
         private void SaveScriptButton_Click(object sender, EventArgs e)
         {
-            //Script script = new(ScriptTextBox.Text, ScriptDescTextBox.Text);
-            //dataManager.AddScript(script);
+            Script script = new(ScriptTextBox.Text, ScriptDescTextBox.Text, LoadedScriptCommands);
+            dataManager.AddScript(script);
+            RefreshScriptsButton.PerformClick();
+        }
+
+        private void NewCommandButton_Click(object sender, EventArgs e)
+        {
+            CommandsDataGrid.ClearSelection();
+            CommandTextBox.Text = "";
+            CommandDescTextBox.Text = "";
+        }
+
+        private void NewScriptButton_Click(object sender, EventArgs e)
+        {
+            ScriptsDataGrid.ClearSelection();
+            LoadedScriptCommands.Clear();
+            ScriptCommandsDataGrid.DataSource = LoadedScriptCommands;
+            ScriptTextBox.Text = "";
+            ScriptDescTextBox.Text = "";
+        }
+
+        private void DeleteCommandButton_Click(object sender, EventArgs e)
+        {
+            DialogResult dialogResult = MessageBox.Show("Are you sure you want to delete this command?", "Delete Command", MessageBoxButtons.YesNo);
+            if (dialogResult == DialogResult.Yes)
+            {
+                dataManager.RemoveCommand(CommandTextBox.Text);
+                RefreshCommandsButton.PerformClick();
+            }
+        }
+
+        private void DeleteScriptButton_Click(object sender, EventArgs e)
+        {
+            DialogResult dialogResult = MessageBox.Show("Are you sure you want to delete this script?", "Delete Script", MessageBoxButtons.YesNo);
+            if (dialogResult == DialogResult.Yes)
+            {
+                dataManager.RemoveScript(ScriptTextBox.Text);
+                RefreshScriptsButton.PerformClick();
+            }
         }
     }
 }

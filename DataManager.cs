@@ -46,6 +46,23 @@ namespace bellatrix
             xmlWriter.Close();
         }
 
+        public List<Command> LoadCommands()
+        {
+            List<Command> commands = new List<Command>();
+
+            XDocument document = XDocument.Load(Commands);
+
+            foreach (XElement element in document.Descendants("Command"))
+            {
+                Command command = new Command(
+                    element.Element("Instruction").Value,
+                    element.Element("Description").Value);
+                commands.Add(command);
+            }
+
+            return commands;
+        }
+
         public void AddCommand(Command command)
         {
             XDocument document = XDocument.Load(Commands);
@@ -70,13 +87,12 @@ namespace bellatrix
             document.Save(Commands);
         }
 
-        public void AddScript(Script script)
+        public void RemoveCommand(string instruction)
         {
-            XDocument document = XDocument.Load(Scripts);
+            XDocument document = XDocument.Load(Commands);
 
-            // unsure how to handle this warning
-            XElement node = (from x in document.Descendants("Script")
-                             where x.Element("Name").Value == script.Name
+            XElement node = (from x in document.Descendants("Command")
+                             where x.Element("Instruction").Value == instruction
                              select x).FirstOrDefault();
 
             if (node != null)
@@ -84,18 +100,7 @@ namespace bellatrix
                 node.Remove();
             }
 
-            XElement root = document.Element("Scripts");
-            root.Add(
-                new XElement("Script",
-                new XElement("Name", script.Name),
-                new XElement("Description", script.Description),
-                new XElement("Commands", from command in script.Commands
-                                         select new XElement("Command",
-                                         new XElement("Instruction", command.Instruction),
-                                         new XElement("Description", command.Description),
-                                         new XElement("Delay", command.Delay)
-                                         ))));
-            document.Save(Scripts);
+            document.Save(Commands);
         }
 
         public List<Script> LoadScripts()
@@ -128,21 +133,48 @@ namespace bellatrix
             return scripts;
         }
 
-        public List<Command> LoadCommands()
+        public void AddScript(Script script)
         {
-            List<Command> commands = new List<Command>();
+            XDocument document = XDocument.Load(Scripts);
 
-            XDocument document = XDocument.Load(Commands);
+            // unsure how to handle this warning
+            XElement node = (from x in document.Descendants("Script")
+                             where x.Element("Name").Value == script.Name
+                             select x).FirstOrDefault();
 
-            foreach (XElement element in document.Descendants("Command"))
+            if (node != null)
             {
-                Command command = new Command(
-                    element.Element("Instruction").Value,
-                    element.Element("Description").Value);
-                commands.Add(command);
+                node.Remove();
             }
 
-            return commands;
+            XElement root = document.Element("Scripts");
+            root.Add(
+                new XElement("Script",
+                new XElement("Name", script.Name),
+                new XElement("Description", script.Description),
+                new XElement("Commands", from command in script.Commands
+                                         select new XElement("Command",
+                                         new XElement("Instruction", command.Instruction),
+                                         new XElement("Description", command.Description),
+                                         new XElement("Delay", command.Delay)
+                                         ))));
+            document.Save(Scripts);
+        }
+
+        public void RemoveScript(string name)
+        {
+            XDocument document = XDocument.Load(Scripts);
+
+            XElement node = (from x in document.Descendants("Script")
+                             where x.Element("Name").Value == name
+                             select x).FirstOrDefault();
+
+            if (node != null)
+            {
+                node.Remove();
+            }
+
+            document.Save(Scripts);
         }
     }
 }
