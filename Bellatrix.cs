@@ -5,9 +5,13 @@ namespace bellatrix
     public partial class Bellatrix : Form
     {
         private DataManager dataManager = new();
+        private ConnectionManager connectionManager = new();
+
         private List<Command> LoadedCommands = new();
         private List<Script> LoadedScripts = new();
         private List<Command> LoadedScriptCommands = new();
+
+        private List<Device> ConnectedDevices = new();
 
         public Bellatrix()
         {
@@ -46,11 +50,18 @@ namespace bellatrix
 
         private void RefreshDevicesButton_Click(object sender, EventArgs e)
         {
-            DevicesDataGrid.DataSource = fakedevices;
+            foreach (var item in ConnectedDevices)
+            {
+                if (item.PortConnection.IsOpen)
+                {
+                    item.PortConnection.Close();
+                }
+            }
+            ConnectedDevices = connectionManager.CollectDevices();
+            DevicesDataGrid.DataSource = ConnectedDevices;
+            //DevicesDataGrid.DataSource = fakedevices;
             DevicesDataGrid.Columns["PortName"].HeaderText = "Port";
             DevicesDataGrid.Columns["PortConnection"].Visible = false;
-            DevicesDataGrid.Columns["VID"].Visible = false;
-            DevicesDataGrid.Columns["PID"].Visible = false;
             DevicesDataGrid.ClearSelection();
         }
 
