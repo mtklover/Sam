@@ -1,3 +1,4 @@
+using System.IO.Ports;
 using System.Reflection;
 
 namespace bellatrix
@@ -27,7 +28,7 @@ namespace bellatrix
             BellatrixLabel.Text = $"Bellatrix (v{Assembly.GetEntryAssembly()?.GetName().Version})";
 
             // check to see if files exist, and create default files if they dont
-            dataManager.FileCheck();
+            dataManager.FileCheck(this);
 
             // load files
             LoadedCommands = dataManager.LoadCommands();
@@ -36,7 +37,7 @@ namespace bellatrix
             RefreshScriptsButton.PerformClick();
 
             // test devices
-            Device device1 = new("COM01");
+            Device device1 = new(this, "COM01");
             device1.IMEI = "000000000000000";
             device1.StorageSize = "256 GB";
             device1.Carrier = "TMB";
@@ -46,13 +47,13 @@ namespace bellatrix
             device1.NetworkLock = "False";
             device1.SerialNo = "XXXXXXXXXXXXXXX";
             fakedevices.Add(device1);
-            Device device2 = new("COM02");
+            Device device2 = new(this, "COM02");
             fakedevices.Add(device2);
-            Device device3 = new("COM03");
+            Device device3 = new(this, "COM03");
             fakedevices.Add(device3);
-            Device device4 = new("COM04");
+            Device device4 = new(this, "COM04");
             fakedevices.Add(device4);
-            Device device5 = new("COM05");
+            Device device5 = new(this, "COM05");
             fakedevices.Add(device5);
         }
 
@@ -65,7 +66,7 @@ namespace bellatrix
                     item.PortConnection.Close();
                 }
             }
-            ConnectedDevices = connectionManager.CollectDevices();
+            ConnectedDevices = connectionManager.CollectDevices(this);
             DevicesDataGrid.DataSource = ConnectedDevices;
             DevicesDataGrid.DataSource = fakedevices;
             DevicesDataGrid.Columns["PortName"].HeaderText = "Port";
@@ -192,5 +193,134 @@ namespace bellatrix
             }
         }
 
+
+
+
+
+        public static string ParseInformation(string data, string start, string end)
+        {
+            if (data.Contains(start) && data.Contains(end))
+            {
+                int Start, End;
+                Start = data.IndexOf(start, 0) + start.Length;
+                End = data.IndexOf(end, Start);
+                return data.Substring(Start, End - Start);
+            }
+            return "";
+        }
+
+        internal void HandleResponse(object sender, SerialDataReceivedEventArgs e)
+        {
+            Device respondingdevice = new();
+
+            foreach (Device device in ConnectedDevices)
+            {
+                if (device.PortConnection == (SerialPort)sender)
+                {
+                    respondingdevice = device;
+                }
+            }
+
+            // need to add the storage size calculator
+
+            string response = respondingdevice.PortConnection.ReadExisting();
+
+            BeginInvoke(new Action(() =>
+            {
+                ConsoleTextBox.AppendText(Environment.NewLine + $"||>> Device @ {respondingdevice.PortName} <<||" + Environment.NewLine + response);
+            }));
+
+            switch (response)
+            {
+                case string x when x.Contains("+DEVCONINFO"):
+                    BeginInvoke(new Action(() =>
+                    {
+                        foreach (Device device in ConnectedDevices)
+                        {
+                            if (device.PortName == respondingdevice.PortName)
+                            {
+                                device.IMEI = ParseInformation(response, "IMEI(", ");");
+                                device.SerialNo = ParseInformation(response, "SN(", ");");
+                                device.Carrier = ParseInformation(response, "PRD(", ");");
+                                device.ModelNo = ParseInformation(response, "MN(", ");");
+                            }
+                        }
+                    }));
+                    break;
+
+                case string x when x.Contains("+REACTIVE"):
+                    BeginInvoke(new Action(() =>
+                    {
+                        string activationstatus = ParseInformation(response, "\n+REACTIVE:1,", "\r\n");
+                        bool activationlocked = false;
+                        switch (activationstatus)
+                        {
+                            case "TRIGGERED":
+                                activationlocked = true;
+                                break;
+
+                            case "LOCK":
+                                activationlocked = true;
+                                break;
+
+                            case "NG(-2)":
+                                activationlocked = false;
+                                break;
+
+                            case "UNLOCK":
+                                activationlocked = false;
+                                break;
+
+                            default:
+                                break;
+                        }
+                        foreach (Device device in ConnectedDevices)
+                        {
+                            if (device.PortName == respondingdevice.PortName)
+                            {
+                                device.ActivationLock = activationlocked.ToString();
+                            }
+                        }
+                    }));
+                    break;
+
+                case string x when x.Contains("+VERSNAME"):
+                    BeginInvoke(new Action(() =>
+                    {
+                        foreach (Device device in ConnectedDevices)
+                        {
+                            if (device.PortName == respondingdevice.PortName)
+                            {
+                                device.AndroidVersion = ParseInformation(response, "NAME:3,ta", "OK");
+                            }
+                        }
+                    }));
+                    break;
+
+                case string x when x.Contains("+SVCIFPGM"):
+                    BeginInvoke(new Action(() =>
+                    {
+                        string networklockstatus = ParseInformation(response, "4,", ",OK");
+                        foreach (Device device in ConnectedDevices)
+                        {
+                            if (device.PortName == respondingdevice.PortName)
+                            {
+                                if (networklockstatus == "LOCK")
+                                {
+                                    device.NetworkLock = "True";
+                                }
+                                else
+                                {
+                                    device.NetworkLock = "False";
+                                }
+                            }
+                        }
+                    }));
+                    break;
+
+                default:
+                    break;
+            }
+        }
     }
 }

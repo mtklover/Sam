@@ -497,12 +497,12 @@
         private Button RunScriptButton;
         private TextBox ScriptTextBox;
         private DataGridView ScriptsDataGrid;
-        private TextBox ConsoleTextBox;
         private Label ConsoleLabel;
         private TextBox CommandLineTextBox;
         private Button SendCommandButton;
         private Button RefreshCommandsButton;
         private Button RefreshScriptsButton;
         private Button ClearConsoleButton;
+        internal TextBox ConsoleTextBox;
     }
 }

@@ -14,7 +14,7 @@ namespace bellatrix
 
         private string Scripts = Path + "\\Scripts.xml";
 
-        public void FileCheck()
+        public void FileCheck(Bellatrix bellatrix)
         {
             if (!File.Exists(Commands))
             {
@@ -23,6 +23,11 @@ namespace bellatrix
                 {
                     AddCommand(command);
                 }
+                bellatrix.ConsoleTextBox.AppendText("Bellatrix: Commands.xml not found, default file created." + Environment.NewLine);
+            }
+            else
+            {
+                bellatrix.ConsoleTextBox.AppendText("Bellatrix: Commands.xml found, loading..." + Environment.NewLine);
             }
             if (!File.Exists(Scripts))
             {
@@ -31,6 +36,11 @@ namespace bellatrix
                 {
                     AddScript(script);
                 }
+                bellatrix.ConsoleTextBox.AppendText("Bellatrix: Scripts.xml not found, default file created." + Environment.NewLine);
+            }
+            else
+            {
+                bellatrix.ConsoleTextBox.AppendText("Bellatrix: Scripts.xml found, loading..." + Environment.NewLine);
             }
         }
 

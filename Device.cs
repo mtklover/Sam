@@ -4,8 +4,8 @@ namespace bellatrix
 {
     internal class Device
     {
-        public string PortName { get; set; }
-        public SerialPort PortConnection { get; set; }
+        public string? PortName { get; set; }
+        public SerialPort? PortConnection { get; set; }
 
         public string? IMEI { get; set; }
         public string? SerialNo { get; set; }
@@ -16,10 +16,17 @@ namespace bellatrix
         public string? NetworkLock { get; set; }
         public string? AndroidVersion { get; set; }
 
-        internal Device(string portname)
+        internal Device()
+        {
+
+        }
+
+        internal Device(Bellatrix bellatrix, string portname)
         {
             PortName = portname;
             PortConnection = new(portname);
+            PortConnection.DataReceived += bellatrix.HandleResponse;
         }
+
     }
 }

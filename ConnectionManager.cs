@@ -9,7 +9,7 @@ namespace bellatrix
 {
     internal class ConnectionManager
     {
-        internal List<Device> CollectDevices()
+        internal List<Device> CollectDevices(Bellatrix bellatrix)
         {
             List<Device> devices = new();
 
@@ -17,7 +17,7 @@ namespace bellatrix
 
             foreach (string port in ports)
             {
-                Device device = new(port);
+                Device device = new(bellatrix, port);
 
                 try
                 {
