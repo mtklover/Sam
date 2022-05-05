@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace bellatrix
+﻿namespace bellatrix
 {
     internal class DefaultContent
     {
@@ -25,7 +19,7 @@ namespace bellatrix
         public List<Script> DefaultScripts = new()
         {
             new Script("Pull Information", "Pulls all information from included commands",
-                new List<Command> 
+                new List<Command>
                 {
                     new Command("AT+DEVCONINFO", "Check Basic Information", 3000),
                     new Command("AT+REACTIVE=1,0,0", "Check Factory Reset Protection", 3000),

@@ -61,6 +61,7 @@
             this.RefreshCommandsButton = new System.Windows.Forms.Button();
             this.RefreshScriptsButton = new System.Windows.Forms.Button();
             this.ClearConsoleButton = new System.Windows.Forms.Button();
+            this.ProgressBar = new System.Windows.Forms.ProgressBar();
             ((System.ComponentModel.ISupportInitialize)(this.DevicesDataGrid)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.CommandsDataGrid)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ScriptCommandsDataGrid)).BeginInit();
@@ -200,7 +201,7 @@
             this.CommandDescTextBox.Location = new System.Drawing.Point(12, 771);
             this.CommandDescTextBox.Multiline = true;
             this.CommandDescTextBox.Name = "CommandDescTextBox";
-            this.CommandDescTextBox.Size = new System.Drawing.Size(342, 78);
+            this.CommandDescTextBox.Size = new System.Drawing.Size(342, 49);
             this.CommandDescTextBox.TabIndex = 4;
             // 
             // CommandLabel
@@ -234,7 +235,7 @@
             this.ScriptCommandsDataGrid.RowHeadersVisible = false;
             this.ScriptCommandsDataGrid.RowTemplate.Height = 25;
             this.ScriptCommandsDataGrid.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.ScriptCommandsDataGrid.Size = new System.Drawing.Size(544, 574);
+            this.ScriptCommandsDataGrid.Size = new System.Drawing.Size(544, 545);
             this.ScriptCommandsDataGrid.TabIndex = 1;
             // 
             // ScriptCommandsLabel
@@ -282,7 +283,7 @@
             this.ScriptDescTextBox.Location = new System.Drawing.Point(360, 771);
             this.ScriptDescTextBox.Multiline = true;
             this.ScriptDescTextBox.Name = "ScriptDescTextBox";
-            this.ScriptDescTextBox.Size = new System.Drawing.Size(342, 78);
+            this.ScriptDescTextBox.Size = new System.Drawing.Size(342, 49);
             this.ScriptDescTextBox.TabIndex = 4;
             // 
             // NewScriptButton
@@ -358,7 +359,7 @@
             this.ConsoleTextBox.Location = new System.Drawing.Point(1258, 79);
             this.ConsoleTextBox.Multiline = true;
             this.ConsoleTextBox.Name = "ConsoleTextBox";
-            this.ConsoleTextBox.Size = new System.Drawing.Size(314, 741);
+            this.ConsoleTextBox.Size = new System.Drawing.Size(314, 712);
             this.ConsoleTextBox.TabIndex = 4;
             // 
             // ConsoleLabel
@@ -373,14 +374,14 @@
             // 
             // CommandLineTextBox
             // 
-            this.CommandLineTextBox.Location = new System.Drawing.Point(1258, 826);
+            this.CommandLineTextBox.Location = new System.Drawing.Point(1258, 797);
             this.CommandLineTextBox.Name = "CommandLineTextBox";
             this.CommandLineTextBox.Size = new System.Drawing.Size(233, 23);
             this.CommandLineTextBox.TabIndex = 4;
             // 
             // SendCommandButton
             // 
-            this.SendCommandButton.Location = new System.Drawing.Point(1497, 826);
+            this.SendCommandButton.Location = new System.Drawing.Point(1497, 796);
             this.SendCommandButton.Name = "SendCommandButton";
             this.SendCommandButton.Size = new System.Drawing.Size(75, 23);
             this.SendCommandButton.TabIndex = 3;
@@ -415,13 +416,20 @@
             this.ClearConsoleButton.TabIndex = 2;
             this.ClearConsoleButton.Text = "Clear";
             this.ClearConsoleButton.UseVisualStyleBackColor = true;
-            this.ClearConsoleButton.Click += new System.EventHandler(this.RefreshDevicesButton_Click);
+            // 
+            // ProgressBar
+            // 
+            this.ProgressBar.Location = new System.Drawing.Point(12, 826);
+            this.ProgressBar.Name = "ProgressBar";
+            this.ProgressBar.Size = new System.Drawing.Size(1560, 23);
+            this.ProgressBar.TabIndex = 5;
             // 
             // Bellatrix
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1584, 861);
+            this.Controls.Add(this.ProgressBar);
             this.Controls.Add(this.ScriptDescTextBox);
             this.Controls.Add(this.ScriptTextBox);
             this.Controls.Add(this.ConsoleTextBox);
@@ -504,5 +512,6 @@
         private Button RefreshScriptsButton;
         private Button ClearConsoleButton;
         internal TextBox ConsoleTextBox;
+        private ProgressBar ProgressBar;
     }
 }

@@ -193,10 +193,6 @@ namespace bellatrix
             }
         }
 
-
-
-
-
         public static string ParseInformation(string data, string start, string end)
         {
             if (data.Contains(start) && data.Contains(end))

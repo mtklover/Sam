@@ -18,7 +18,6 @@ namespace bellatrix
 
         internal Device()
         {
-
         }
 
         internal Device(Bellatrix bellatrix, string portname)
@@ -27,6 +26,5 @@ namespace bellatrix
             PortConnection = new(portname);
             PortConnection.DataReceived += bellatrix.HandleResponse;
         }
-
     }
 }

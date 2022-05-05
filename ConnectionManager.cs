@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO.Ports;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.IO.Ports;
 
 namespace bellatrix
 {
@@ -37,9 +32,31 @@ namespace bellatrix
             return devices;
         }
 
-        internal void SendCommand(Device device)
+        internal void RunCommand(Device device, Command command)
         {
+            device.PortConnection.Write($"{command.Instruction}\r");
+        }
 
+        internal void RunScript(Bellatrix bellatrix, Device device, Script script, ProgressBar progressbar)
+        {
+            int count = 0;
+            int progressnum = 1;
+
+            IProgress<int> progress = new Progress<int>(value =>
+            {
+                bellatrix.BeginInvoke(new Action(() => { progressbar.Value = value; }));
+            });
+
+            foreach (Command command in script.Commands)
+            {
+                count++;
+                var percentComplete = (progressnum * 100) / script.Commands.Count;
+                progressnum++;
+                progress.Report(percentComplete);
+                device.PortConnection.Write($"{command.Instruction}\r");
+                Thread.Sleep(Convert.ToInt32(command.Delay));
+            }
+            bellatrix.BeginInvoke(new Action(() => { progressbar.Value = 0; }));
         }
     }
 }
