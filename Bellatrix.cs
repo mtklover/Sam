@@ -37,6 +37,14 @@ namespace bellatrix
 
             // test devices
             Device device1 = new("COM01");
+            device1.IMEI = "000000000000000";
+            device1.StorageSize = "256 GB";
+            device1.Carrier = "TMB";
+            device1.AndroidVersion = "11";
+            device1.ActivationLock = "True";
+            device1.ModelNo = "SM-G955U";
+            device1.NetworkLock = "False";
+            device1.SerialNo = "XXXXXXXXXXXXXXX";
             fakedevices.Add(device1);
             Device device2 = new("COM02");
             fakedevices.Add(device2);
@@ -59,8 +67,15 @@ namespace bellatrix
             }
             ConnectedDevices = connectionManager.CollectDevices();
             DevicesDataGrid.DataSource = ConnectedDevices;
-            //DevicesDataGrid.DataSource = fakedevices;
+            DevicesDataGrid.DataSource = fakedevices;
             DevicesDataGrid.Columns["PortName"].HeaderText = "Port";
+            DevicesDataGrid.Columns["SerialNo"].HeaderText = "Serial No.";
+            DevicesDataGrid.Columns["ModelNo"].HeaderText = "Model No.";
+            DevicesDataGrid.Columns["ActivationLock"].HeaderText = "Activation Lock";
+            DevicesDataGrid.Columns["StorageSize"].HeaderText = "Storage Size";
+            DevicesDataGrid.Columns["NetworkLock"].HeaderText = "Network Lock";
+            DevicesDataGrid.Columns["AndroidVersion"].HeaderText = "Android Version";
+
             DevicesDataGrid.Columns["PortConnection"].Visible = false;
             DevicesDataGrid.ClearSelection();
         }
@@ -112,7 +127,11 @@ namespace bellatrix
                     ScriptTextBox.Text = item.Name;
                     ScriptDescTextBox.Text = item.Description;
                     ScriptCommandsDataGrid.DataSource = item.Commands;
-                    ScriptCommandsDataGrid.Columns["Description"].Visible = false;
+                    ScriptCommandsDataGrid.Columns["Instruction"].HeaderText = "Command";
+                    ScriptCommandsDataGrid.Columns["Instruction"].FillWeight = 100;
+                    ScriptCommandsDataGrid.Columns["Description"].FillWeight = 100;
+                    ScriptCommandsDataGrid.Columns["Delay"].HeaderText = "Delay (ms)";
+                    ScriptCommandsDataGrid.Columns["Delay"].FillWeight = 40;
                 }
             }
         }
@@ -126,8 +145,14 @@ namespace bellatrix
 
         private void SaveScriptButton_Click(object sender, EventArgs e)
         {
-            Script script = new(ScriptTextBox.Text, ScriptDescTextBox.Text, LoadedScriptCommands);
-            dataManager.AddScript(script);
+            foreach (var item in LoadedScripts)
+            {
+                if (item.Name == ScriptTextBox.Text)
+                {
+                    Script script = new(ScriptTextBox.Text, ScriptDescTextBox.Text, item.Commands);
+                    dataManager.AddScript(script);
+                }
+            }
             RefreshScriptsButton.PerformClick();
         }
 
@@ -166,5 +191,6 @@ namespace bellatrix
                 RefreshScriptsButton.PerformClick();
             }
         }
+
     }
 }

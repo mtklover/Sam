@@ -60,6 +60,7 @@
             this.SendCommandButton = new System.Windows.Forms.Button();
             this.RefreshCommandsButton = new System.Windows.Forms.Button();
             this.RefreshScriptsButton = new System.Windows.Forms.Button();
+            this.ClearConsoleButton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.DevicesDataGrid)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.CommandsDataGrid)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ScriptCommandsDataGrid)).BeginInit();
@@ -120,7 +121,7 @@
             // 
             this.CommandsLabel.AutoSize = true;
             this.CommandsLabel.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.CommandsLabel.Location = new System.Drawing.Point(484, 242);
+            this.CommandsLabel.Location = new System.Drawing.Point(12, 242);
             this.CommandsLabel.Name = "CommandsLabel";
             this.CommandsLabel.Size = new System.Drawing.Size(118, 30);
             this.CommandsLabel.TabIndex = 0;
@@ -135,7 +136,7 @@
             this.CommandsDataGrid.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.CommandsDataGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.CommandsDataGrid.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
-            this.CommandsDataGrid.Location = new System.Drawing.Point(484, 304);
+            this.CommandsDataGrid.Location = new System.Drawing.Point(12, 275);
             this.CommandsDataGrid.MultiSelect = false;
             this.CommandsDataGrid.Name = "CommandsDataGrid";
             this.CommandsDataGrid.ReadOnly = true;
@@ -144,13 +145,13 @@
             this.CommandsDataGrid.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.CommandsDataGrid.ShowCellToolTips = false;
             this.CommandsDataGrid.ShowEditingIcon = false;
-            this.CommandsDataGrid.Size = new System.Drawing.Size(252, 165);
+            this.CommandsDataGrid.Size = new System.Drawing.Size(342, 346);
             this.CommandsDataGrid.TabIndex = 1;
             this.CommandsDataGrid.SelectionChanged += new System.EventHandler(this.CommandsDataGrid_SelectionChanged);
             // 
             // NewCommandButton
             // 
-            this.NewCommandButton.Location = new System.Drawing.Point(484, 275);
+            this.NewCommandButton.Location = new System.Drawing.Point(198, 627);
             this.NewCommandButton.Name = "NewCommandButton";
             this.NewCommandButton.Size = new System.Drawing.Size(75, 23);
             this.NewCommandButton.TabIndex = 3;
@@ -160,7 +161,7 @@
             // 
             // DeleteCommandButton
             // 
-            this.DeleteCommandButton.Location = new System.Drawing.Point(484, 475);
+            this.DeleteCommandButton.Location = new System.Drawing.Point(12, 627);
             this.DeleteCommandButton.Name = "DeleteCommandButton";
             this.DeleteCommandButton.Size = new System.Drawing.Size(75, 23);
             this.DeleteCommandButton.TabIndex = 3;
@@ -170,7 +171,7 @@
             // 
             // SaveCommandButton
             // 
-            this.SaveCommandButton.Location = new System.Drawing.Point(580, 516);
+            this.SaveCommandButton.Location = new System.Drawing.Point(279, 627);
             this.SaveCommandButton.Name = "SaveCommandButton";
             this.SaveCommandButton.Size = new System.Drawing.Size(75, 23);
             this.SaveCommandButton.TabIndex = 3;
@@ -180,7 +181,7 @@
             // 
             // RunCommandButton
             // 
-            this.RunCommandButton.Location = new System.Drawing.Point(661, 516);
+            this.RunCommandButton.Location = new System.Drawing.Point(279, 696);
             this.RunCommandButton.Name = "RunCommandButton";
             this.RunCommandButton.Size = new System.Drawing.Size(75, 23);
             this.RunCommandButton.TabIndex = 3;
@@ -189,24 +190,24 @@
             // 
             // CommandTextBox
             // 
-            this.CommandTextBox.Location = new System.Drawing.Point(484, 545);
+            this.CommandTextBox.Location = new System.Drawing.Point(12, 725);
             this.CommandTextBox.Name = "CommandTextBox";
-            this.CommandTextBox.Size = new System.Drawing.Size(252, 23);
+            this.CommandTextBox.Size = new System.Drawing.Size(342, 23);
             this.CommandTextBox.TabIndex = 4;
             // 
             // CommandDescTextBox
             // 
-            this.CommandDescTextBox.Location = new System.Drawing.Point(484, 591);
+            this.CommandDescTextBox.Location = new System.Drawing.Point(12, 771);
             this.CommandDescTextBox.Multiline = true;
             this.CommandDescTextBox.Name = "CommandDescTextBox";
-            this.CommandDescTextBox.Size = new System.Drawing.Size(252, 78);
+            this.CommandDescTextBox.Size = new System.Drawing.Size(342, 78);
             this.CommandDescTextBox.TabIndex = 4;
             // 
             // CommandLabel
             // 
             this.CommandLabel.AutoSize = true;
             this.CommandLabel.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.CommandLabel.Location = new System.Drawing.Point(484, 525);
+            this.CommandLabel.Location = new System.Drawing.Point(12, 705);
             this.CommandLabel.Name = "CommandLabel";
             this.CommandLabel.Size = new System.Drawing.Size(68, 17);
             this.CommandLabel.TabIndex = 0;
@@ -216,7 +217,7 @@
             // 
             this.CommandDescLabel.AutoSize = true;
             this.CommandDescLabel.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.CommandDescLabel.Location = new System.Drawing.Point(484, 571);
+            this.CommandDescLabel.Location = new System.Drawing.Point(12, 751);
             this.CommandDescLabel.Name = "CommandDescLabel";
             this.CommandDescLabel.Size = new System.Drawing.Size(74, 17);
             this.CommandDescLabel.TabIndex = 0;
@@ -224,39 +225,33 @@
             // 
             // ScriptCommandsDataGrid
             // 
-            this.ScriptCommandsDataGrid.AllowUserToAddRows = false;
-            this.ScriptCommandsDataGrid.AllowUserToDeleteRows = false;
             this.ScriptCommandsDataGrid.AllowUserToResizeColumns = false;
             this.ScriptCommandsDataGrid.AllowUserToResizeRows = false;
             this.ScriptCommandsDataGrid.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.ScriptCommandsDataGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.ScriptCommandsDataGrid.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
-            this.ScriptCommandsDataGrid.Location = new System.Drawing.Point(1000, 304);
+            this.ScriptCommandsDataGrid.Location = new System.Drawing.Point(708, 275);
             this.ScriptCommandsDataGrid.Name = "ScriptCommandsDataGrid";
-            this.ScriptCommandsDataGrid.ReadOnly = true;
             this.ScriptCommandsDataGrid.RowHeadersVisible = false;
             this.ScriptCommandsDataGrid.RowTemplate.Height = 25;
             this.ScriptCommandsDataGrid.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.ScriptCommandsDataGrid.ShowCellToolTips = false;
-            this.ScriptCommandsDataGrid.ShowEditingIcon = false;
-            this.ScriptCommandsDataGrid.Size = new System.Drawing.Size(252, 365);
+            this.ScriptCommandsDataGrid.Size = new System.Drawing.Size(544, 574);
             this.ScriptCommandsDataGrid.TabIndex = 1;
             // 
             // ScriptCommandsLabel
             // 
             this.ScriptCommandsLabel.AutoSize = true;
             this.ScriptCommandsLabel.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.ScriptCommandsLabel.Location = new System.Drawing.Point(1000, 284);
+            this.ScriptCommandsLabel.Location = new System.Drawing.Point(708, 255);
             this.ScriptCommandsLabel.Name = "ScriptCommandsLabel";
-            this.ScriptCommandsLabel.Size = new System.Drawing.Size(74, 17);
+            this.ScriptCommandsLabel.Size = new System.Drawing.Size(111, 17);
             this.ScriptCommandsLabel.TabIndex = 0;
-            this.ScriptCommandsLabel.Text = "Commands";
+            this.ScriptCommandsLabel.Text = "Script Commands";
             // 
             // ScriptLabel
             // 
             this.ScriptLabel.AutoSize = true;
             this.ScriptLabel.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.ScriptLabel.Location = new System.Drawing.Point(742, 525);
+            this.ScriptLabel.Location = new System.Drawing.Point(360, 705);
             this.ScriptLabel.Name = "ScriptLabel";
             this.ScriptLabel.Size = new System.Drawing.Size(41, 17);
             this.ScriptLabel.TabIndex = 0;
@@ -266,7 +261,7 @@
             // 
             this.ScriptDescLabel.AutoSize = true;
             this.ScriptDescLabel.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.ScriptDescLabel.Location = new System.Drawing.Point(742, 571);
+            this.ScriptDescLabel.Location = new System.Drawing.Point(360, 751);
             this.ScriptDescLabel.Name = "ScriptDescLabel";
             this.ScriptDescLabel.Size = new System.Drawing.Size(74, 17);
             this.ScriptDescLabel.TabIndex = 0;
@@ -276,7 +271,7 @@
             // 
             this.ScriptsLabel.AutoSize = true;
             this.ScriptsLabel.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.ScriptsLabel.Location = new System.Drawing.Point(742, 242);
+            this.ScriptsLabel.Location = new System.Drawing.Point(360, 242);
             this.ScriptsLabel.Name = "ScriptsLabel";
             this.ScriptsLabel.Size = new System.Drawing.Size(74, 30);
             this.ScriptsLabel.TabIndex = 0;
@@ -284,15 +279,15 @@
             // 
             // ScriptDescTextBox
             // 
-            this.ScriptDescTextBox.Location = new System.Drawing.Point(742, 591);
+            this.ScriptDescTextBox.Location = new System.Drawing.Point(360, 771);
             this.ScriptDescTextBox.Multiline = true;
             this.ScriptDescTextBox.Name = "ScriptDescTextBox";
-            this.ScriptDescTextBox.Size = new System.Drawing.Size(252, 78);
+            this.ScriptDescTextBox.Size = new System.Drawing.Size(342, 78);
             this.ScriptDescTextBox.TabIndex = 4;
             // 
             // NewScriptButton
             // 
-            this.NewScriptButton.Location = new System.Drawing.Point(742, 275);
+            this.NewScriptButton.Location = new System.Drawing.Point(546, 627);
             this.NewScriptButton.Name = "NewScriptButton";
             this.NewScriptButton.Size = new System.Drawing.Size(75, 23);
             this.NewScriptButton.TabIndex = 3;
@@ -302,7 +297,7 @@
             // 
             // DeleteScriptButton
             // 
-            this.DeleteScriptButton.Location = new System.Drawing.Point(742, 475);
+            this.DeleteScriptButton.Location = new System.Drawing.Point(360, 627);
             this.DeleteScriptButton.Name = "DeleteScriptButton";
             this.DeleteScriptButton.Size = new System.Drawing.Size(75, 23);
             this.DeleteScriptButton.TabIndex = 3;
@@ -312,7 +307,7 @@
             // 
             // SaveScriptButton
             // 
-            this.SaveScriptButton.Location = new System.Drawing.Point(838, 516);
+            this.SaveScriptButton.Location = new System.Drawing.Point(627, 627);
             this.SaveScriptButton.Name = "SaveScriptButton";
             this.SaveScriptButton.Size = new System.Drawing.Size(75, 23);
             this.SaveScriptButton.TabIndex = 3;
@@ -322,7 +317,7 @@
             // 
             // RunScriptButton
             // 
-            this.RunScriptButton.Location = new System.Drawing.Point(919, 516);
+            this.RunScriptButton.Location = new System.Drawing.Point(627, 696);
             this.RunScriptButton.Name = "RunScriptButton";
             this.RunScriptButton.Size = new System.Drawing.Size(75, 23);
             this.RunScriptButton.TabIndex = 3;
@@ -331,9 +326,9 @@
             // 
             // ScriptTextBox
             // 
-            this.ScriptTextBox.Location = new System.Drawing.Point(742, 545);
+            this.ScriptTextBox.Location = new System.Drawing.Point(360, 725);
             this.ScriptTextBox.Name = "ScriptTextBox";
-            this.ScriptTextBox.Size = new System.Drawing.Size(252, 23);
+            this.ScriptTextBox.Size = new System.Drawing.Size(342, 23);
             this.ScriptTextBox.TabIndex = 4;
             // 
             // ScriptsDataGrid
@@ -345,7 +340,7 @@
             this.ScriptsDataGrid.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.ScriptsDataGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.ScriptsDataGrid.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
-            this.ScriptsDataGrid.Location = new System.Drawing.Point(742, 304);
+            this.ScriptsDataGrid.Location = new System.Drawing.Point(360, 275);
             this.ScriptsDataGrid.MultiSelect = false;
             this.ScriptsDataGrid.Name = "ScriptsDataGrid";
             this.ScriptsDataGrid.ReadOnly = true;
@@ -354,23 +349,23 @@
             this.ScriptsDataGrid.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.ScriptsDataGrid.ShowCellToolTips = false;
             this.ScriptsDataGrid.ShowEditingIcon = false;
-            this.ScriptsDataGrid.Size = new System.Drawing.Size(252, 165);
+            this.ScriptsDataGrid.Size = new System.Drawing.Size(342, 346);
             this.ScriptsDataGrid.TabIndex = 1;
             this.ScriptsDataGrid.SelectionChanged += new System.EventHandler(this.ScriptsDataGrid_SelectionChanged);
             // 
             // ConsoleTextBox
             // 
-            this.ConsoleTextBox.Location = new System.Drawing.Point(12, 275);
+            this.ConsoleTextBox.Location = new System.Drawing.Point(1258, 79);
             this.ConsoleTextBox.Multiline = true;
             this.ConsoleTextBox.Name = "ConsoleTextBox";
-            this.ConsoleTextBox.Size = new System.Drawing.Size(466, 365);
+            this.ConsoleTextBox.Size = new System.Drawing.Size(314, 741);
             this.ConsoleTextBox.TabIndex = 4;
             // 
             // ConsoleLabel
             // 
             this.ConsoleLabel.AutoSize = true;
             this.ConsoleLabel.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.ConsoleLabel.Location = new System.Drawing.Point(12, 242);
+            this.ConsoleLabel.Location = new System.Drawing.Point(1258, 46);
             this.ConsoleLabel.Name = "ConsoleLabel";
             this.ConsoleLabel.Size = new System.Drawing.Size(87, 30);
             this.ConsoleLabel.TabIndex = 0;
@@ -378,14 +373,14 @@
             // 
             // CommandLineTextBox
             // 
-            this.CommandLineTextBox.Location = new System.Drawing.Point(12, 646);
+            this.CommandLineTextBox.Location = new System.Drawing.Point(1258, 826);
             this.CommandLineTextBox.Name = "CommandLineTextBox";
-            this.CommandLineTextBox.Size = new System.Drawing.Size(385, 23);
+            this.CommandLineTextBox.Size = new System.Drawing.Size(233, 23);
             this.CommandLineTextBox.TabIndex = 4;
             // 
             // SendCommandButton
             // 
-            this.SendCommandButton.Location = new System.Drawing.Point(403, 646);
+            this.SendCommandButton.Location = new System.Drawing.Point(1497, 826);
             this.SendCommandButton.Name = "SendCommandButton";
             this.SendCommandButton.Size = new System.Drawing.Size(75, 23);
             this.SendCommandButton.TabIndex = 3;
@@ -394,7 +389,7 @@
             // 
             // RefreshCommandsButton
             // 
-            this.RefreshCommandsButton.Location = new System.Drawing.Point(661, 275);
+            this.RefreshCommandsButton.Location = new System.Drawing.Point(279, 246);
             this.RefreshCommandsButton.Name = "RefreshCommandsButton";
             this.RefreshCommandsButton.Size = new System.Drawing.Size(75, 23);
             this.RefreshCommandsButton.TabIndex = 3;
@@ -404,7 +399,7 @@
             // 
             // RefreshScriptsButton
             // 
-            this.RefreshScriptsButton.Location = new System.Drawing.Point(919, 275);
+            this.RefreshScriptsButton.Location = new System.Drawing.Point(627, 246);
             this.RefreshScriptsButton.Name = "RefreshScriptsButton";
             this.RefreshScriptsButton.Size = new System.Drawing.Size(75, 23);
             this.RefreshScriptsButton.TabIndex = 3;
@@ -412,11 +407,21 @@
             this.RefreshScriptsButton.UseVisualStyleBackColor = true;
             this.RefreshScriptsButton.Click += new System.EventHandler(this.RefreshScriptsButton_Click);
             // 
+            // ClearConsoleButton
+            // 
+            this.ClearConsoleButton.Location = new System.Drawing.Point(1497, 50);
+            this.ClearConsoleButton.Name = "ClearConsoleButton";
+            this.ClearConsoleButton.Size = new System.Drawing.Size(75, 23);
+            this.ClearConsoleButton.TabIndex = 2;
+            this.ClearConsoleButton.Text = "Clear";
+            this.ClearConsoleButton.UseVisualStyleBackColor = true;
+            this.ClearConsoleButton.Click += new System.EventHandler(this.RefreshDevicesButton_Click);
+            // 
             // Bellatrix
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1264, 681);
+            this.ClientSize = new System.Drawing.Size(1584, 861);
             this.Controls.Add(this.ScriptDescTextBox);
             this.Controls.Add(this.ScriptTextBox);
             this.Controls.Add(this.ConsoleTextBox);
@@ -434,6 +439,7 @@
             this.Controls.Add(this.RefreshScriptsButton);
             this.Controls.Add(this.RefreshCommandsButton);
             this.Controls.Add(this.NewCommandButton);
+            this.Controls.Add(this.ClearConsoleButton);
             this.Controls.Add(this.RefreshDevicesButton);
             this.Controls.Add(this.ScriptCommandsDataGrid);
             this.Controls.Add(this.ScriptsDataGrid);
@@ -497,5 +503,6 @@
         private Button SendCommandButton;
         private Button RefreshCommandsButton;
         private Button RefreshScriptsButton;
+        private Button ClearConsoleButton;
     }
 }
