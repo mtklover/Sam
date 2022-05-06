@@ -218,6 +218,7 @@ namespace bellatrix
                                 device.SerialNo = ParseInformation(response, "SN(", ");");
                                 device.Carrier = ParseInformation(response, "PRD(", ");");
                                 device.ModelNo = ParseInformation(response, "MN(", ");");
+                                DevicesDataGrid.Refresh();
                             }
                         }
                     }));
@@ -300,16 +301,6 @@ namespace bellatrix
 
         private void RunCommandButton_Click(object sender, EventArgs e)
         {
-            Command? currentcommand = new();
-
-            foreach (Command command in LoadedCommands)
-            {
-                if (command.Instruction == CommandTextBox.Text)
-                {
-                    currentcommand = command;
-                }
-            }
-
             // i know this is shitty, ill fix it later
             foreach (DataGridViewRow row in DevicesDataGrid.Rows)
             {
@@ -319,9 +310,12 @@ namespace bellatrix
                     {
                         if (row.Cells[0].Value.ToString() == device.PortName)
                         {
-                            if (currentcommand != null)
+                            foreach (Command command in LoadedCommands)
                             {
-                                connectionManager.RunCommand(device, currentcommand);
+                                if (command.Instruction == CommandTextBox.Text)
+                                {
+                                    connectionManager.RunCommand(device, command);
+                                }
                             }
                         }
                     }
