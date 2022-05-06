@@ -379,6 +379,7 @@
             this.CommandLineTextBox.Name = "CommandLineTextBox";
             this.CommandLineTextBox.Size = new System.Drawing.Size(233, 23);
             this.CommandLineTextBox.TabIndex = 4;
+            this.CommandLineTextBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.CommandLineTextBox_KeyDown);
             // 
             // SendCommandButton
             // 
@@ -388,6 +389,7 @@
             this.SendCommandButton.TabIndex = 3;
             this.SendCommandButton.Text = "Send";
             this.SendCommandButton.UseVisualStyleBackColor = true;
+            this.SendCommandButton.Click += new System.EventHandler(this.SendCommandButton_Click);
             // 
             // RefreshCommandsButton
             // 

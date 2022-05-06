@@ -268,7 +268,7 @@ namespace bellatrix
                         {
                             if (device.PortName == respondingdevice.PortName)
                             {
-                                device.AndroidVersion = ParseInformation(response, "NAME:3,ta", "OK");
+                                device.AndroidVersion = ParseInformation(response, "NAME:3,", "OK");
                                 DevicesDataGrid.Refresh();
                             }
                         }
@@ -324,6 +324,35 @@ namespace bellatrix
                         }
                     }
                 }
+            }
+        }
+
+        private void SendCommandButton_Click(object sender, EventArgs e)
+        {
+            Command command = new(CommandLineTextBox.Text, "");
+
+            foreach (DataGridViewRow row in DevicesDataGrid.Rows)
+            {
+                if (row.Selected)
+                {
+                    foreach (Device device in ConnectedDevices)
+                    {
+                        if (row.Cells[0].Value.ToString() == device.PortName)
+                        {
+                            connectionManager.RunCommand(device, command);
+                        }
+                    }
+                }
+            }
+
+            CommandLineTextBox.Text = null;
+        }
+
+        private void CommandLineTextBox_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                SendCommandButton.PerformClick();
             }
         }
     }
