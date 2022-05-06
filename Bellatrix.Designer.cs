@@ -188,6 +188,7 @@
             this.RunCommandButton.TabIndex = 3;
             this.RunCommandButton.Text = "Run";
             this.RunCommandButton.UseVisualStyleBackColor = true;
+            this.RunCommandButton.Click += new System.EventHandler(this.RunCommandButton_Click);
             // 
             // CommandTextBox
             // 

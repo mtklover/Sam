@@ -35,26 +35,6 @@ namespace bellatrix
             RefreshCommandsButton.PerformClick();
             LoadedScripts = dataManager.LoadScripts();
             RefreshScriptsButton.PerformClick();
-
-            // test devices
-            Device device1 = new(this, "COM01");
-            device1.IMEI = "000000000000000";
-            device1.StorageSize = "256 GB";
-            device1.Carrier = "TMB";
-            device1.AndroidVersion = "11";
-            device1.ActivationLock = "True";
-            device1.ModelNo = "SM-G955U";
-            device1.NetworkLock = "False";
-            device1.SerialNo = "XXXXXXXXXXXXXXX";
-            fakedevices.Add(device1);
-            Device device2 = new(this, "COM02");
-            fakedevices.Add(device2);
-            Device device3 = new(this, "COM03");
-            fakedevices.Add(device3);
-            Device device4 = new(this, "COM04");
-            fakedevices.Add(device4);
-            Device device5 = new(this, "COM05");
-            fakedevices.Add(device5);
         }
 
         private void RefreshDevicesButton_Click(object sender, EventArgs e)
@@ -68,7 +48,6 @@ namespace bellatrix
             }
             ConnectedDevices = connectionManager.CollectDevices(this);
             DevicesDataGrid.DataSource = ConnectedDevices;
-            DevicesDataGrid.DataSource = fakedevices;
             DevicesDataGrid.Columns["PortName"].HeaderText = "Port";
             DevicesDataGrid.Columns["SerialNo"].HeaderText = "Serial No.";
             DevicesDataGrid.Columns["ModelNo"].HeaderText = "Model No.";
@@ -316,6 +295,37 @@ namespace bellatrix
 
                 default:
                     break;
+            }
+        }
+
+        private void RunCommandButton_Click(object sender, EventArgs e)
+        {
+            Command? currentcommand = new();
+
+            foreach (Command command in LoadedCommands)
+            {
+                if (command.Instruction == CommandTextBox.Text)
+                {
+                    currentcommand = command;
+                }
+            }
+
+            // i know this is shitty, ill fix it later
+            foreach (DataGridViewRow row in DevicesDataGrid.Rows)
+            {
+                if (row.Selected)
+                {
+                    foreach (Device device in ConnectedDevices)
+                    {
+                        if (row.Cells[0].Value.ToString() == device.PortName)
+                        {
+                            if (currentcommand != null)
+                            {
+                                connectionManager.RunCommand(device, currentcommand);
+                            }
+                        }
+                    }
+                }
             }
         }
     }

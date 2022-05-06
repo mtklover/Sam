@@ -10,24 +10,33 @@ namespace bellatrix
 
             string[] ports = SerialPort.GetPortNames();
 
-            foreach (string port in ports)
+            if (ports.Count() > 0)
             {
-                Device device = new(bellatrix, port);
+                foreach (string port in ports)
+                {
+                    Device device = new(bellatrix, port);
 
-                try
-                {
-                    device.PortConnection.Open();
-                }
-                catch
-                {
-                    device.PortName = device.PortName + "ERROR";
-                }
+                    try
+                    {
+                        device.PortConnection.Open();
+                    }
+                    catch
+                    {
+                        device.PortName = device.PortName + "ERROR";
+                    }
 
-                if (device.PortConnection.IsOpen)
-                {
-                    devices.Add(device);
+                    if (device.PortConnection.IsOpen)
+                    {
+                        devices.Add(device);
+                        bellatrix.ConsoleTextBox.AppendText($"Bellatrix: Connected to {device.PortName}" + Environment.NewLine);
+                    }
                 }
             }
+            else
+            {
+                bellatrix.ConsoleTextBox.AppendText("Bellatrix: No devices found" + Environment.NewLine);
+            }
+            
 
             return devices;
         }
