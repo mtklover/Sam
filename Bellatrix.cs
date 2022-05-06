@@ -1,3 +1,4 @@
+using System;
 using System.IO.Ports;
 using System.Reflection;
 
@@ -39,6 +40,7 @@ namespace bellatrix
 
         private void RefreshDevicesButton_Click(object sender, EventArgs e)
         {
+            ConsoleTextBox.AppendText("Bellatrix: Disconnecting current devices..." + Environment.NewLine);
             foreach (var item in ConnectedDevices)
             {
                 if (item.PortConnection.IsOpen)
@@ -46,6 +48,7 @@ namespace bellatrix
                     item.PortConnection.Close();
                 }
             }
+            ConsoleTextBox.AppendText("Bellatrix: Refreshing devices..." + Environment.NewLine);
             ConnectedDevices = connectionManager.CollectDevices(this);
             DevicesDataGrid.DataSource = ConnectedDevices;
             DevicesDataGrid.Columns["PortName"].HeaderText = "Port";
@@ -58,6 +61,7 @@ namespace bellatrix
 
             DevicesDataGrid.Columns["PortConnection"].Visible = false;
             DevicesDataGrid.ClearSelection();
+            ConsoleTextBox.AppendText("Bellatrix: Devices refreshed" + Environment.NewLine);
         }
 
         private void RefreshCommandsButton_Click(object sender, EventArgs e)
@@ -354,6 +358,45 @@ namespace bellatrix
             {
                 SendCommandButton.PerformClick();
             }
+        }
+
+        private void RunScriptButton_Click(object sender, EventArgs e)
+        {
+            foreach (DataGridViewRow row in DevicesDataGrid.Rows)
+            {
+                if (row.Selected)
+                {
+                    foreach (Device device in ConnectedDevices)
+                    {
+                        if (row.Cells[0].Value.ToString() == device.PortName)
+                        {
+                            Task.Run(() => RunScript(device));
+                        }
+                    }
+                }
+            }
+        }
+
+        private void RunScript(Device device)
+        {
+            int count = 0;
+            int progressnum = 1;
+
+            IProgress<int> progress = new Progress<int>(value =>
+            {
+                BeginInvoke(new Action(() => { ProgressBar.Value = value; }));
+            });
+
+            foreach (DataGridViewRow row in ScriptCommandsDataGrid.Rows)
+            {
+                count++;
+                var percentComplete = (progressnum * 100) / ScriptCommandsDataGrid.Rows.Count;
+                progressnum++;
+                progress.Report(percentComplete);
+                device.PortConnection.Write($"{row.Cells["Instruction"].Value}\r");
+                Thread.Sleep(Convert.ToInt32(row.Cells["Delay"].Value));
+            }
+            BeginInvoke(new Action(() => { ProgressBar.Value = 0; }));
         }
     }
 }

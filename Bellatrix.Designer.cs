@@ -325,6 +325,7 @@
             this.RunScriptButton.TabIndex = 3;
             this.RunScriptButton.Text = "Run";
             this.RunScriptButton.UseVisualStyleBackColor = true;
+            this.RunScriptButton.Click += new System.EventHandler(this.RunScriptButton_Click);
             // 
             // ScriptTextBox
             // 
