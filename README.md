@@ -2,6 +2,8 @@
 
 ! THIS IS A CURRENT WORK IN PROGRESS !
 
+Windows Form (.Net 6)
+
 ### Samsung mobile device identification/functions using the Hayes command set, also known as the AT (Attention) command set.
 
 [WIP SCREENSHOT](bellatrixteaser.PNG "WIP SCREENSHOT")
