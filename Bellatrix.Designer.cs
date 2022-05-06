@@ -62,6 +62,8 @@
             this.RefreshScriptsButton = new System.Windows.Forms.Button();
             this.ClearConsoleButton = new System.Windows.Forms.Button();
             this.ProgressBar = new System.Windows.Forms.ProgressBar();
+            this.DeleteScriptCommandButton = new System.Windows.Forms.Button();
+            this.AddScriptCommandButton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.DevicesDataGrid)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.CommandsDataGrid)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ScriptCommandsDataGrid)).BeginInit();
@@ -231,6 +233,7 @@
             this.ScriptCommandsDataGrid.AllowUserToResizeRows = false;
             this.ScriptCommandsDataGrid.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.ScriptCommandsDataGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.ScriptCommandsDataGrid.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter;
             this.ScriptCommandsDataGrid.Location = new System.Drawing.Point(708, 275);
             this.ScriptCommandsDataGrid.Name = "ScriptCommandsDataGrid";
             this.ScriptCommandsDataGrid.RowHeadersVisible = false;
@@ -361,6 +364,8 @@
             this.ConsoleTextBox.Location = new System.Drawing.Point(1258, 79);
             this.ConsoleTextBox.Multiline = true;
             this.ConsoleTextBox.Name = "ConsoleTextBox";
+            this.ConsoleTextBox.ReadOnly = true;
+            this.ConsoleTextBox.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.ConsoleTextBox.Size = new System.Drawing.Size(314, 712);
             this.ConsoleTextBox.TabIndex = 4;
             // 
@@ -420,6 +425,7 @@
             this.ClearConsoleButton.TabIndex = 2;
             this.ClearConsoleButton.Text = "Clear";
             this.ClearConsoleButton.UseVisualStyleBackColor = true;
+            this.ClearConsoleButton.Click += new System.EventHandler(this.ClearConsoleButton_Click);
             // 
             // ProgressBar
             // 
@@ -427,6 +433,26 @@
             this.ProgressBar.Name = "ProgressBar";
             this.ProgressBar.Size = new System.Drawing.Size(1560, 23);
             this.ProgressBar.TabIndex = 5;
+            // 
+            // DeleteScriptCommandButton
+            // 
+            this.DeleteScriptCommandButton.Location = new System.Drawing.Point(1177, 246);
+            this.DeleteScriptCommandButton.Name = "DeleteScriptCommandButton";
+            this.DeleteScriptCommandButton.Size = new System.Drawing.Size(75, 23);
+            this.DeleteScriptCommandButton.TabIndex = 3;
+            this.DeleteScriptCommandButton.Text = "Delete";
+            this.DeleteScriptCommandButton.UseVisualStyleBackColor = true;
+            this.DeleteScriptCommandButton.Click += new System.EventHandler(this.DeleteScriptCommandButton_Click);
+            // 
+            // AddScriptCommandButton
+            // 
+            this.AddScriptCommandButton.Location = new System.Drawing.Point(1096, 245);
+            this.AddScriptCommandButton.Name = "AddScriptCommandButton";
+            this.AddScriptCommandButton.Size = new System.Drawing.Size(75, 23);
+            this.AddScriptCommandButton.TabIndex = 3;
+            this.AddScriptCommandButton.Text = "Add";
+            this.AddScriptCommandButton.UseVisualStyleBackColor = true;
+            this.AddScriptCommandButton.Click += new System.EventHandler(this.AddScriptCommandButton_Click);
             // 
             // Bellatrix
             // 
@@ -448,6 +474,8 @@
             this.Controls.Add(this.DeleteCommandButton);
             this.Controls.Add(this.NewScriptButton);
             this.Controls.Add(this.SendCommandButton);
+            this.Controls.Add(this.AddScriptCommandButton);
+            this.Controls.Add(this.DeleteScriptCommandButton);
             this.Controls.Add(this.RefreshScriptsButton);
             this.Controls.Add(this.RefreshCommandsButton);
             this.Controls.Add(this.NewCommandButton);
@@ -517,5 +545,7 @@
         private Button ClearConsoleButton;
         internal TextBox ConsoleTextBox;
         private ProgressBar ProgressBar;
+        private Button DeleteScriptCommandButton;
+        private Button AddScriptCommandButton;
     }
 }

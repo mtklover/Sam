@@ -1,4 +1,5 @@
-﻿using System.Xml;
+﻿using System.ComponentModel;
+using System.Xml;
 using System.Xml.Linq;
 
 namespace bellatrix
@@ -124,7 +125,7 @@ namespace bellatrix
 
             foreach (XElement element in document.Descendants("Script"))
             {
-                List<Command> commands = new List<Command>();
+                BindingList<Command> commands = new BindingList<Command>();
 
                 foreach (XElement item in element.Descendants("Command"))
                 {

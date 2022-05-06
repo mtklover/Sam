@@ -398,5 +398,55 @@ namespace bellatrix
             }
             BeginInvoke(new Action(() => { ProgressBar.Value = 0; }));
         }
+
+        private void ClearConsoleButton_Click(object sender, EventArgs e)
+        {
+            ConsoleTextBox.Text = null;
+        }
+
+        private void AddScriptCommandButton_Click(object sender, EventArgs e)
+        {
+            foreach (var item in LoadedScripts)
+            {
+                if (item.Name == ScriptTextBox.Text)
+                {
+                    Command command = new("ENTER COMMAND", "ENTER DESCRIPTION", 1000);
+                    item.Commands.Add(command);
+                    ScriptCommandsDataGrid.DataSource = item.Commands;
+                    ScriptCommandsDataGrid.Refresh();
+                }
+            }
+        }
+
+        private void DeleteScriptCommandButton_Click(object sender, EventArgs e)
+        {
+            foreach (DataGridViewRow row in ScriptCommandsDataGrid.Rows)
+            {
+                if (row.Selected)
+                {
+                    foreach (var item in LoadedScripts)
+                    {
+                        if (item.Name == ScriptTextBox.Text)
+                        {
+                            Command commandtodelete = new(row.Cells["Instruction"].Value.ToString(), row.Cells["Description"].Value.ToString(), Convert.ToInt32(row.Cells["Delay"].Value));
+
+                            List<Command> commandstodelete = new();
+
+                            foreach (var command in item.Commands)
+                            {
+                                if (command.Instruction == commandtodelete.Instruction && command.Description == commandtodelete.Description && command.Delay == commandtodelete.Delay)
+                                {
+                                    commandstodelete.Add(command);
+                                }
+                            }
+                            foreach (var delete in commandstodelete)
+                            {
+                                item.Commands.Remove(delete);
+                            }
+                        }
+                    }
+                }
+            }
+        }
     }
 }

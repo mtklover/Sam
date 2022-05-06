@@ -1,4 +1,6 @@
-﻿namespace bellatrix
+﻿using System.ComponentModel;
+
+namespace bellatrix
 {
     internal class DefaultContent
     {
@@ -19,7 +21,7 @@
         public List<Script> DefaultScripts = new()
         {
             new Script("Pull Information", "Pulls all information from included commands",
-                new List<Command>
+                new BindingList<Command>
                 {
                     new Command("AT+DEVCONINFO", "Check Basic Information", 3000),
                     new Command("AT+REACTIVE=1,0,0", "Check Factory Reset Protection", 3000),
@@ -28,14 +30,14 @@
                     new Command("AT+VERSNAME=3,2,3", "Check Android Version", 3000),
                 }),
             new Script("Test Script 2", "something something something2",
-                new List<Command>
+                new BindingList<Command>
                 {
                     new Command("AT+SUDDLMOD=0,0", "Download Mode", 2222),
                     new Command("AT+SUDDLMOD=0,0", "Download Mode", 2222),
                     new Command("AT+SUDDLMOD=0,0", "Download Mode", 2222)
                 }),
             new Script("Test Script 3", "something something something3",
-                new List<Command>
+                new BindingList<Command>
                 {
                     new Command("AT+FACTORST=0,0", "Factory Reset", 3333),
                     new Command("AT+FACTORST=0,0", "Factory Reset", 3333),
