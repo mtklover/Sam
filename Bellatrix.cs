@@ -385,6 +385,7 @@ namespace bellatrix
             IProgress<int> progress = new Progress<int>(value =>
             {
                 BeginInvoke(new Action(() => { ProgressBar.Value = value; }));
+                BeginInvoke(new Action(() => { ScriptCommandsDataGrid.Rows[count - 1].Selected = true; }));
             });
 
             foreach (DataGridViewRow row in ScriptCommandsDataGrid.Rows)
@@ -396,7 +397,7 @@ namespace bellatrix
                 device.PortConnection.Write($"{row.Cells["Instruction"].Value}\r");
                 Thread.Sleep(Convert.ToInt32(row.Cells["Delay"].Value));
             }
-            BeginInvoke(new Action(() => { ProgressBar.Value = 0; }));
+            BeginInvoke(new Action(() => { ProgressBar.Value = 0; ScriptCommandsDataGrid.ClearSelection(); }));
         }
 
         private void ClearConsoleButton_Click(object sender, EventArgs e)

@@ -235,6 +235,7 @@
             this.ScriptCommandsDataGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.ScriptCommandsDataGrid.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter;
             this.ScriptCommandsDataGrid.Location = new System.Drawing.Point(708, 275);
+            this.ScriptCommandsDataGrid.MultiSelect = false;
             this.ScriptCommandsDataGrid.Name = "ScriptCommandsDataGrid";
             this.ScriptCommandsDataGrid.RowHeadersVisible = false;
             this.ScriptCommandsDataGrid.RowTemplate.Height = 25;
