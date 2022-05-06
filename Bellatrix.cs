@@ -202,7 +202,7 @@ namespace bellatrix
 
             BeginInvoke(new Action(() =>
             {
-                ConsoleTextBox.AppendText(Environment.NewLine + $"||>> Device @ {respondingdevice.PortName} <<||" + Environment.NewLine + response);
+                ConsoleTextBox.AppendText($"Device: {respondingdevice.PortName}" + Environment.NewLine + response);
             }));
 
             switch (response)
@@ -255,6 +255,7 @@ namespace bellatrix
                             if (device.PortName == respondingdevice.PortName)
                             {
                                 device.ActivationLock = activationlocked.ToString();
+                                DevicesDataGrid.Refresh();
                             }
                         }
                     }));
@@ -268,6 +269,7 @@ namespace bellatrix
                             if (device.PortName == respondingdevice.PortName)
                             {
                                 device.AndroidVersion = ParseInformation(response, "NAME:3,ta", "OK");
+                                DevicesDataGrid.Refresh();
                             }
                         }
                     }));
@@ -284,10 +286,12 @@ namespace bellatrix
                                 if (networklockstatus == "LOCK")
                                 {
                                     device.NetworkLock = "True";
+                                    DevicesDataGrid.Refresh();
                                 }
                                 else
                                 {
                                     device.NetworkLock = "False";
+                                    DevicesDataGrid.Refresh();
                                 }
                             }
                         }
