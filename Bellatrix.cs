@@ -26,7 +26,7 @@ namespace bellatrix
         private void Bellatrix_Load(object sender, EventArgs e)
         {
             // get version info for label
-            BellatrixLabel.Text = $"Bellatrix (v{Assembly.GetEntryAssembly()?.GetName().Version})";
+            VersionLabel.Text = $"v{Assembly.GetEntryAssembly()?.GetName().Version}";
 
             // check to see if files exist, and create default files if they dont
             dataManager.FileCheck(this);
@@ -73,6 +73,7 @@ namespace bellatrix
             CommandsDataGrid.ClearSelection();
             CommandTextBox.Text = "";
             CommandDescTextBox.Text = "";
+            CommandsLoadedLabel.Text = $"{LoadedCommands.Count} Commands";
         }
 
         private void RefreshScriptsButton_Click(object sender, EventArgs e)
@@ -85,6 +86,7 @@ namespace bellatrix
             ScriptCommandsDataGrid.DataSource = LoadedScriptCommands;
             ScriptTextBox.Text = "";
             ScriptDescTextBox.Text = "";
+            ScriptsLoadedLabel.Text = $"{LoadedScripts.Count} Scripts";
         }
 
         private void CommandsDataGrid_SelectionChanged(object sender, EventArgs e)
@@ -309,47 +311,61 @@ namespace bellatrix
 
         private void RunCommandButton_Click(object sender, EventArgs e)
         {
-            // i know this is shitty, ill fix it later
-            foreach (DataGridViewRow row in DevicesDataGrid.Rows)
+            if (!(DevicesDataGrid.SelectedRows.Count < 1))
             {
-                if (row.Selected)
+                // i know this is shitty, ill fix it later
+                foreach (DataGridViewRow row in DevicesDataGrid.Rows)
                 {
-                    foreach (Device device in ConnectedDevices)
+                    if (row.Selected)
                     {
-                        if (row.Cells[0].Value.ToString() == device.PortName)
+                        foreach (Device device in ConnectedDevices)
                         {
-                            foreach (Command command in LoadedCommands)
+                            if (row.Cells[0].Value.ToString() == device.PortName)
                             {
-                                if (command.Instruction == CommandTextBox.Text)
+                                foreach (Command command in LoadedCommands)
                                 {
-                                    connectionManager.RunCommand(device, command);
+                                    if (command.Instruction == CommandTextBox.Text)
+                                    {
+                                        connectionManager.RunCommand(device, command);
+                                    }
                                 }
                             }
                         }
                     }
                 }
             }
+            else
+            {
+                ConsoleTextBox.AppendText("Bellatrix: No devices selected" + Environment.NewLine);
+            }
         }
 
         private void SendCommandButton_Click(object sender, EventArgs e)
         {
-            Command command = new(CommandLineTextBox.Text, "");
-
-            foreach (DataGridViewRow row in DevicesDataGrid.Rows)
+            if (!(DevicesDataGrid.SelectedRows.Count < 1))
             {
-                if (row.Selected)
+                Command command = new(CommandLineTextBox.Text, "");
+
+                foreach (DataGridViewRow row in DevicesDataGrid.Rows)
                 {
-                    foreach (Device device in ConnectedDevices)
+                    if (row.Selected)
                     {
-                        if (row.Cells[0].Value.ToString() == device.PortName)
+                        foreach (Device device in ConnectedDevices)
                         {
-                            connectionManager.RunCommand(device, command);
+                            if (row.Cells[0].Value.ToString() == device.PortName)
+                            {
+                                connectionManager.RunCommand(device, command);
+                            }
                         }
                     }
                 }
-            }
 
-            CommandLineTextBox.Text = null;
+                CommandLineTextBox.Text = null;
+            }
+            else
+            {
+                ConsoleTextBox.AppendText("Bellatrix: No devices selected" + Environment.NewLine);
+            }
         }
 
         private void CommandLineTextBox_KeyDown(object sender, KeyEventArgs e)
@@ -362,18 +378,25 @@ namespace bellatrix
 
         private void RunScriptButton_Click(object sender, EventArgs e)
         {
-            foreach (DataGridViewRow row in DevicesDataGrid.Rows)
+            if (!(DevicesDataGrid.SelectedRows.Count < 1))
             {
-                if (row.Selected)
+                foreach (DataGridViewRow row in DevicesDataGrid.Rows)
                 {
-                    foreach (Device device in ConnectedDevices)
+                    if (row.Selected)
                     {
-                        if (row.Cells[0].Value.ToString() == device.PortName)
+                        foreach (Device device in ConnectedDevices)
                         {
-                            Task.Run(() => RunScript(device));
+                            if (row.Cells[0].Value.ToString() == device.PortName)
+                            {
+                                Task.Run(() => RunScript(device));
+                            }
                         }
                     }
                 }
+            }
+            else
+            {
+                ConsoleTextBox.AppendText("Bellatrix: No devices selected" + Environment.NewLine);
             }
         }
 
@@ -444,6 +467,29 @@ namespace bellatrix
                             {
                                 item.Commands.Remove(delete);
                             }
+                        }
+                    }
+                }
+            }
+        }
+
+        private void AddCommandToScriptButton_Click(object sender, EventArgs e)
+        {
+            foreach (Script script in LoadedScripts)
+            {
+                if (script.Name == ScriptTextBox.Text)
+                {
+                    foreach (Command command in LoadedCommands)
+                    {
+                        if (command.Instruction == CommandTextBox.Text)
+                        {
+                            // set default delay
+                            Command tempcommand = command;
+                            tempcommand.Delay = 1000;
+
+                            script.Commands.Add(command);
+                            ScriptCommandsDataGrid.DataSource = script.Commands;
+                            ScriptCommandsDataGrid.Refresh();
                         }
                     }
                 }

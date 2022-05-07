@@ -64,6 +64,11 @@
             this.ProgressBar = new System.Windows.Forms.ProgressBar();
             this.DeleteScriptCommandButton = new System.Windows.Forms.Button();
             this.AddScriptCommandButton = new System.Windows.Forms.Button();
+            this.ScriptsLoadedLabel = new System.Windows.Forms.Label();
+            this.CommandsLoadedLabel = new System.Windows.Forms.Label();
+            this.AddCommandToScriptButton = new System.Windows.Forms.Button();
+            this.SRTLabel = new System.Windows.Forms.Label();
+            this.VersionLabel = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.DevicesDataGrid)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.CommandsDataGrid)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ScriptCommandsDataGrid)).BeginInit();
@@ -94,6 +99,7 @@
             this.DevicesDataGrid.ReadOnly = true;
             this.DevicesDataGrid.RowHeadersVisible = false;
             this.DevicesDataGrid.RowTemplate.Height = 25;
+            this.DevicesDataGrid.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.DevicesDataGrid.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.DevicesDataGrid.ShowCellToolTips = false;
             this.DevicesDataGrid.ShowEditingIcon = false;
@@ -145,16 +151,17 @@
             this.CommandsDataGrid.ReadOnly = true;
             this.CommandsDataGrid.RowHeadersVisible = false;
             this.CommandsDataGrid.RowTemplate.Height = 25;
+            this.CommandsDataGrid.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.CommandsDataGrid.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.CommandsDataGrid.ShowCellToolTips = false;
             this.CommandsDataGrid.ShowEditingIcon = false;
-            this.CommandsDataGrid.Size = new System.Drawing.Size(342, 346);
+            this.CommandsDataGrid.Size = new System.Drawing.Size(342, 282);
             this.CommandsDataGrid.TabIndex = 1;
             this.CommandsDataGrid.SelectionChanged += new System.EventHandler(this.CommandsDataGrid_SelectionChanged);
             // 
             // NewCommandButton
             // 
-            this.NewCommandButton.Location = new System.Drawing.Point(198, 627);
+            this.NewCommandButton.Location = new System.Drawing.Point(198, 563);
             this.NewCommandButton.Name = "NewCommandButton";
             this.NewCommandButton.Size = new System.Drawing.Size(75, 23);
             this.NewCommandButton.TabIndex = 3;
@@ -164,7 +171,7 @@
             // 
             // DeleteCommandButton
             // 
-            this.DeleteCommandButton.Location = new System.Drawing.Point(12, 627);
+            this.DeleteCommandButton.Location = new System.Drawing.Point(12, 563);
             this.DeleteCommandButton.Name = "DeleteCommandButton";
             this.DeleteCommandButton.Size = new System.Drawing.Size(75, 23);
             this.DeleteCommandButton.TabIndex = 3;
@@ -174,7 +181,7 @@
             // 
             // SaveCommandButton
             // 
-            this.SaveCommandButton.Location = new System.Drawing.Point(279, 627);
+            this.SaveCommandButton.Location = new System.Drawing.Point(279, 563);
             this.SaveCommandButton.Name = "SaveCommandButton";
             this.SaveCommandButton.Size = new System.Drawing.Size(75, 23);
             this.SaveCommandButton.TabIndex = 3;
@@ -184,7 +191,7 @@
             // 
             // RunCommandButton
             // 
-            this.RunCommandButton.Location = new System.Drawing.Point(279, 696);
+            this.RunCommandButton.Location = new System.Drawing.Point(279, 621);
             this.RunCommandButton.Name = "RunCommandButton";
             this.RunCommandButton.Size = new System.Drawing.Size(75, 23);
             this.RunCommandButton.TabIndex = 3;
@@ -194,24 +201,25 @@
             // 
             // CommandTextBox
             // 
-            this.CommandTextBox.Location = new System.Drawing.Point(12, 725);
+            this.CommandTextBox.Location = new System.Drawing.Point(12, 650);
             this.CommandTextBox.Name = "CommandTextBox";
             this.CommandTextBox.Size = new System.Drawing.Size(342, 23);
             this.CommandTextBox.TabIndex = 4;
             // 
             // CommandDescTextBox
             // 
-            this.CommandDescTextBox.Location = new System.Drawing.Point(12, 771);
+            this.CommandDescTextBox.Location = new System.Drawing.Point(12, 696);
             this.CommandDescTextBox.Multiline = true;
             this.CommandDescTextBox.Name = "CommandDescTextBox";
-            this.CommandDescTextBox.Size = new System.Drawing.Size(342, 49);
+            this.CommandDescTextBox.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.CommandDescTextBox.Size = new System.Drawing.Size(342, 124);
             this.CommandDescTextBox.TabIndex = 4;
             // 
             // CommandLabel
             // 
             this.CommandLabel.AutoSize = true;
             this.CommandLabel.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.CommandLabel.Location = new System.Drawing.Point(12, 705);
+            this.CommandLabel.Location = new System.Drawing.Point(12, 630);
             this.CommandLabel.Name = "CommandLabel";
             this.CommandLabel.Size = new System.Drawing.Size(68, 17);
             this.CommandLabel.TabIndex = 0;
@@ -221,7 +229,7 @@
             // 
             this.CommandDescLabel.AutoSize = true;
             this.CommandDescLabel.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.CommandDescLabel.Location = new System.Drawing.Point(12, 751);
+            this.CommandDescLabel.Location = new System.Drawing.Point(12, 676);
             this.CommandDescLabel.Name = "CommandDescLabel";
             this.CommandDescLabel.Size = new System.Drawing.Size(74, 17);
             this.CommandDescLabel.TabIndex = 0;
@@ -239,6 +247,7 @@
             this.ScriptCommandsDataGrid.Name = "ScriptCommandsDataGrid";
             this.ScriptCommandsDataGrid.RowHeadersVisible = false;
             this.ScriptCommandsDataGrid.RowTemplate.Height = 25;
+            this.ScriptCommandsDataGrid.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.ScriptCommandsDataGrid.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.ScriptCommandsDataGrid.Size = new System.Drawing.Size(544, 545);
             this.ScriptCommandsDataGrid.TabIndex = 1;
@@ -257,7 +266,7 @@
             // 
             this.ScriptLabel.AutoSize = true;
             this.ScriptLabel.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.ScriptLabel.Location = new System.Drawing.Point(360, 705);
+            this.ScriptLabel.Location = new System.Drawing.Point(360, 630);
             this.ScriptLabel.Name = "ScriptLabel";
             this.ScriptLabel.Size = new System.Drawing.Size(41, 17);
             this.ScriptLabel.TabIndex = 0;
@@ -267,7 +276,7 @@
             // 
             this.ScriptDescLabel.AutoSize = true;
             this.ScriptDescLabel.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.ScriptDescLabel.Location = new System.Drawing.Point(360, 751);
+            this.ScriptDescLabel.Location = new System.Drawing.Point(360, 676);
             this.ScriptDescLabel.Name = "ScriptDescLabel";
             this.ScriptDescLabel.Size = new System.Drawing.Size(74, 17);
             this.ScriptDescLabel.TabIndex = 0;
@@ -285,15 +294,16 @@
             // 
             // ScriptDescTextBox
             // 
-            this.ScriptDescTextBox.Location = new System.Drawing.Point(360, 771);
+            this.ScriptDescTextBox.Location = new System.Drawing.Point(360, 696);
             this.ScriptDescTextBox.Multiline = true;
             this.ScriptDescTextBox.Name = "ScriptDescTextBox";
-            this.ScriptDescTextBox.Size = new System.Drawing.Size(342, 49);
+            this.ScriptDescTextBox.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.ScriptDescTextBox.Size = new System.Drawing.Size(342, 124);
             this.ScriptDescTextBox.TabIndex = 4;
             // 
             // NewScriptButton
             // 
-            this.NewScriptButton.Location = new System.Drawing.Point(546, 627);
+            this.NewScriptButton.Location = new System.Drawing.Point(546, 563);
             this.NewScriptButton.Name = "NewScriptButton";
             this.NewScriptButton.Size = new System.Drawing.Size(75, 23);
             this.NewScriptButton.TabIndex = 3;
@@ -303,7 +313,7 @@
             // 
             // DeleteScriptButton
             // 
-            this.DeleteScriptButton.Location = new System.Drawing.Point(360, 627);
+            this.DeleteScriptButton.Location = new System.Drawing.Point(360, 563);
             this.DeleteScriptButton.Name = "DeleteScriptButton";
             this.DeleteScriptButton.Size = new System.Drawing.Size(75, 23);
             this.DeleteScriptButton.TabIndex = 3;
@@ -313,7 +323,7 @@
             // 
             // SaveScriptButton
             // 
-            this.SaveScriptButton.Location = new System.Drawing.Point(627, 627);
+            this.SaveScriptButton.Location = new System.Drawing.Point(627, 563);
             this.SaveScriptButton.Name = "SaveScriptButton";
             this.SaveScriptButton.Size = new System.Drawing.Size(75, 23);
             this.SaveScriptButton.TabIndex = 3;
@@ -323,7 +333,7 @@
             // 
             // RunScriptButton
             // 
-            this.RunScriptButton.Location = new System.Drawing.Point(627, 696);
+            this.RunScriptButton.Location = new System.Drawing.Point(627, 621);
             this.RunScriptButton.Name = "RunScriptButton";
             this.RunScriptButton.Size = new System.Drawing.Size(75, 23);
             this.RunScriptButton.TabIndex = 3;
@@ -333,7 +343,7 @@
             // 
             // ScriptTextBox
             // 
-            this.ScriptTextBox.Location = new System.Drawing.Point(360, 725);
+            this.ScriptTextBox.Location = new System.Drawing.Point(360, 650);
             this.ScriptTextBox.Name = "ScriptTextBox";
             this.ScriptTextBox.Size = new System.Drawing.Size(342, 23);
             this.ScriptTextBox.TabIndex = 4;
@@ -353,10 +363,11 @@
             this.ScriptsDataGrid.ReadOnly = true;
             this.ScriptsDataGrid.RowHeadersVisible = false;
             this.ScriptsDataGrid.RowTemplate.Height = 25;
+            this.ScriptsDataGrid.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.ScriptsDataGrid.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.ScriptsDataGrid.ShowCellToolTips = false;
             this.ScriptsDataGrid.ShowEditingIcon = false;
-            this.ScriptsDataGrid.Size = new System.Drawing.Size(342, 346);
+            this.ScriptsDataGrid.Size = new System.Drawing.Size(342, 282);
             this.ScriptsDataGrid.TabIndex = 1;
             this.ScriptsDataGrid.SelectionChanged += new System.EventHandler(this.ScriptsDataGrid_SelectionChanged);
             // 
@@ -455,6 +466,56 @@
             this.AddScriptCommandButton.UseVisualStyleBackColor = true;
             this.AddScriptCommandButton.Click += new System.EventHandler(this.AddScriptCommandButton_Click);
             // 
+            // ScriptsLoadedLabel
+            // 
+            this.ScriptsLoadedLabel.AutoSize = true;
+            this.ScriptsLoadedLabel.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.ScriptsLoadedLabel.Location = new System.Drawing.Point(440, 248);
+            this.ScriptsLoadedLabel.Name = "ScriptsLoadedLabel";
+            this.ScriptsLoadedLabel.Size = new System.Drawing.Size(38, 17);
+            this.ScriptsLoadedLabel.TabIndex = 0;
+            this.ScriptsLoadedLabel.Text = "------";
+            // 
+            // CommandsLoadedLabel
+            // 
+            this.CommandsLoadedLabel.AutoSize = true;
+            this.CommandsLoadedLabel.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.CommandsLoadedLabel.Location = new System.Drawing.Point(136, 248);
+            this.CommandsLoadedLabel.Name = "CommandsLoadedLabel";
+            this.CommandsLoadedLabel.Size = new System.Drawing.Size(38, 17);
+            this.CommandsLoadedLabel.TabIndex = 0;
+            this.CommandsLoadedLabel.Text = "------";
+            // 
+            // AddCommandToScriptButton
+            // 
+            this.AddCommandToScriptButton.Location = new System.Drawing.Point(198, 592);
+            this.AddCommandToScriptButton.Name = "AddCommandToScriptButton";
+            this.AddCommandToScriptButton.Size = new System.Drawing.Size(156, 23);
+            this.AddCommandToScriptButton.TabIndex = 3;
+            this.AddCommandToScriptButton.Text = "Add Command To Script";
+            this.AddCommandToScriptButton.UseVisualStyleBackColor = true;
+            this.AddCommandToScriptButton.Click += new System.EventHandler(this.AddCommandToScriptButton_Click);
+            // 
+            // SRTLabel
+            // 
+            this.SRTLabel.AutoSize = true;
+            this.SRTLabel.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.SRTLabel.Location = new System.Drawing.Point(136, 15);
+            this.SRTLabel.Name = "SRTLabel";
+            this.SRTLabel.Size = new System.Drawing.Size(231, 30);
+            this.SRTLabel.TabIndex = 0;
+            this.SRTLabel.Text = "Samsung Research Tool";
+            // 
+            // VersionLabel
+            // 
+            this.VersionLabel.AutoSize = true;
+            this.VersionLabel.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.VersionLabel.Location = new System.Drawing.Point(1485, 9);
+            this.VersionLabel.Name = "VersionLabel";
+            this.VersionLabel.Size = new System.Drawing.Size(0, 30);
+            this.VersionLabel.TabIndex = 0;
+            this.VersionLabel.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
             // Bellatrix
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -472,6 +533,7 @@
             this.Controls.Add(this.SaveScriptButton);
             this.Controls.Add(this.SaveCommandButton);
             this.Controls.Add(this.DeleteScriptButton);
+            this.Controls.Add(this.AddCommandToScriptButton);
             this.Controls.Add(this.DeleteCommandButton);
             this.Controls.Add(this.NewScriptButton);
             this.Controls.Add(this.SendCommandButton);
@@ -486,6 +548,8 @@
             this.Controls.Add(this.ScriptsDataGrid);
             this.Controls.Add(this.CommandsDataGrid);
             this.Controls.Add(this.DevicesDataGrid);
+            this.Controls.Add(this.CommandsLoadedLabel);
+            this.Controls.Add(this.ScriptsLoadedLabel);
             this.Controls.Add(this.ScriptCommandsLabel);
             this.Controls.Add(this.ScriptsLabel);
             this.Controls.Add(this.ScriptDescLabel);
@@ -494,6 +558,8 @@
             this.Controls.Add(this.CommandLabel);
             this.Controls.Add(this.ConsoleLabel);
             this.Controls.Add(this.CommandsLabel);
+            this.Controls.Add(this.VersionLabel);
+            this.Controls.Add(this.SRTLabel);
             this.Controls.Add(this.DevicesLabel);
             this.Controls.Add(this.BellatrixLabel);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
@@ -548,5 +614,10 @@
         private ProgressBar ProgressBar;
         private Button DeleteScriptCommandButton;
         private Button AddScriptCommandButton;
+        private Label ScriptsLoadedLabel;
+        private Label CommandsLoadedLabel;
+        private Button AddCommandToScriptButton;
+        private Label SRTLabel;
+        private Label VersionLabel;
     }
 }
