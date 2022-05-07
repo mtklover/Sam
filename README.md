@@ -37,4 +37,8 @@ ADB (USB Debugging) is not required for bellatrix, but some commands may not wor
 
 ### Included in default **"Scripts.xml"** file
 
-*COMING SOON*
+- Pull Information (Pulls all information from included commands)
+
+- Enable USB Debugging (Enables USB Debugging) *COMING SOON* ;)
+
+*MORE COMING SOON*
