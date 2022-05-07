@@ -4,7 +4,8 @@
 
 Windows Form (.Net 6)
 
-### Samsung mobile device identification/functions using the Hayes command set, also known as the AT (Attention) command set.
+### Samsung Research Tool
+Device identification/functions using the Hayes command set, also known as the AT (Attention) command set.
 
 [WIP SCREENSHOT](bellatrixteaser.PNG "WIP SCREENSHOT")
 
@@ -14,24 +15,22 @@ ADB (USB Debugging) is not required for bellatrix, but some commands may not wor
 
 ### Included in default **"Commands.xml"** file
 
-- Device Identification (AT+DEVCONINFO)
+- Device Identification
 	- IMEI
 	- Serial Number
 	- Model Number
 	- Carrier
-	- Activation Lock (AT+REACTIVE=1,0,0)
-	- Storage Size (AT+SIZECHECK=?)
-	- Network Lock (AT+SVCIFPGM=1,4)
-	- Android Version (AT+VERSNAME=3,2,3)
-
-- Download Mode (AT+SUDDLMOD=0,0)
-
-- Factory Reset (AT+FACTORST=0,0)
+	- Activation Lock
+	- Storage Size
+	- Network Lock
+	- Android Version
+- Download Mode
+- Factory Reset
 
 - Touch Screen Emulation
-	- Single Tap (AT+CTSA=2,500,500)
-	- Double Tap (AT+CTSA=3,500,500)
-	- Swipe (AT+CTSA=1,500,500;+CTSA=0,1000,1000)
+	- Single Tap
+	- Double Tap
+	- Swipe
 
 *MORE COMING SOON*
 
