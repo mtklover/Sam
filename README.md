@@ -38,6 +38,6 @@ ADB (USB Debugging) is not required for bellatrix, but some commands may not wor
 
 - Pull Information (Pulls all information from included commands)
 
-- Enable USB Debugging (Enables USB Debugging) *COMING SOON* ;)
+- Enable USB Debugging (Enables USB Debugging)
 
 *MORE COMING SOON*
