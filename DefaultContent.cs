@@ -44,8 +44,8 @@ namespace bellatrix
                     new Command("AT+SYSSCOPE=1,0", "?", 5000),
                     // THESE MIGHT BE STEPS FOR OLDER PHONES BUT NOT IN THE CORRECT ORDER
                     // WILL GET BACK TO THIS AS SOON AS IM IN FRONT OF MORE DEVICES
-                    //new Command("AT+KSTRINGB=0,3", "?", 5000),
-                    //new Command("AT+DUMPCTRL=1,0", "?", 3000),
+                    new Command("AT+KSTRINGB=0,3", "?", 5000),
+                    new Command("AT+DUMPCTRL=1,0", "?", 3000),
                     new Command("AT+SWATD=0", "?", 5000),
                     new Command("AT+ACTIVATE=0,0,0", "?", 10000),
                     new Command("AT+SWATD=1", "?", 5000),
