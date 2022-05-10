@@ -15,6 +15,7 @@ namespace bellatrix
             new Command("AT+FACTORST=0,0", "Factory Reset"),
             new Command("AT+CTSA=2,500,500", "Single Tap Screen"),
             new Command("AT+CTSA=3,500,500", "Double Tap Screen"),
+            new Command("AT+CTSA=1,500,500;+CTSA=0,1000,1000", "Swipe Screen"),
             new Command("AT+SYSSCOPE=1,0", "Have information on this command? Visit the repo and submit a pull request with your changes to DefaultContent!"),
             new Command("AT+KSTRINGB=0,3", "Have information on this command? Visit the repo and submit a pull request with your changes to DefaultContent!"),
             new Command("AT+DUMPCTRL=1,0", "Have information on this command? Visit the repo and submit a pull request with your changes to DefaultContent!"),

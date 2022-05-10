@@ -502,9 +502,9 @@
             this.SRTLabel.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.SRTLabel.Location = new System.Drawing.Point(136, 15);
             this.SRTLabel.Name = "SRTLabel";
-            this.SRTLabel.Size = new System.Drawing.Size(231, 30);
+            this.SRTLabel.Size = new System.Drawing.Size(362, 30);
             this.SRTLabel.TabIndex = 0;
-            this.SRTLabel.Text = "Samsung Research Tool";
+            this.SRTLabel.Text = "Samsung AT Command Research Tool";
             // 
             // VersionLabel
             // 

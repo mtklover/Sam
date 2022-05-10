@@ -43,7 +43,7 @@ namespace bellatrix
 
         internal void RunCommand(Device device, Command command)
         {
-            device.PortConnection.Write($"{command.Instruction}\r");
+            device.PortConnection.Write($"{command.Instruction}\r\n");
         }
 
         internal void RunScript(Bellatrix bellatrix, Device device, Script script, ProgressBar progressbar)
@@ -62,7 +62,7 @@ namespace bellatrix
                 var percentComplete = (progressnum * 100) / script.Commands.Count;
                 progressnum++;
                 progress.Report(percentComplete);
-                device.PortConnection.Write($"{command.Instruction}\r");
+                device.PortConnection.Write($"{command.Instruction}\r\n");
                 Thread.Sleep(Convert.ToInt32(command.Delay));
             }
             bellatrix.BeginInvoke(new Action(() => { progressbar.Value = 0; }));
