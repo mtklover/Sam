@@ -82,6 +82,7 @@
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage3 = new System.Windows.Forms.TabPage();
             this.tabPage4 = new System.Windows.Forms.TabPage();
+            this.CleanParametersCheckBox = new System.Windows.Forms.CheckBox();
             this.ImportTextBox = new System.Windows.Forms.TextBox();
             this.ImportButton = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
@@ -546,9 +547,9 @@
             this.Parameter4.AutoSize = true;
             this.Parameter4.Location = new System.Drawing.Point(1372, 772);
             this.Parameter4.Name = "Parameter4";
-            this.Parameter4.Size = new System.Drawing.Size(32, 19);
+            this.Parameter4.Size = new System.Drawing.Size(88, 19);
             this.Parameter4.TabIndex = 7;
-            this.Parameter4.Text = "4";
+            this.Parameter4.Text = "4 (Disabled)";
             this.Parameter4.UseVisualStyleBackColor = true;
             // 
             // Parameter3
@@ -666,6 +667,7 @@
             // 
             // tabPage4
             // 
+            this.tabPage4.Controls.Add(this.CleanParametersCheckBox);
             this.tabPage4.Controls.Add(this.ImportTextBox);
             this.tabPage4.Controls.Add(this.ImportButton);
             this.tabPage4.Controls.Add(this.label2);
@@ -679,6 +681,16 @@
             this.tabPage4.TabIndex = 1;
             this.tabPage4.Text = "Importer";
             this.tabPage4.UseVisualStyleBackColor = true;
+            // 
+            // CleanParametersCheckBox
+            // 
+            this.CleanParametersCheckBox.AutoSize = true;
+            this.CleanParametersCheckBox.Location = new System.Drawing.Point(275, 8);
+            this.CleanParametersCheckBox.Name = "CleanParametersCheckBox";
+            this.CleanParametersCheckBox.Size = new System.Drawing.Size(118, 19);
+            this.CleanParametersCheckBox.TabIndex = 13;
+            this.CleanParametersCheckBox.Text = "Clean Parameters";
+            this.CleanParametersCheckBox.UseVisualStyleBackColor = true;
             // 
             // ImportTextBox
             // 
@@ -868,5 +880,6 @@
         private Label label1;
         private TextBox DelayTextBox;
         private TextBox PrefixTextBox;
+        private CheckBox CleanParametersCheckBox;
     }
 }

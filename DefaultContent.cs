@@ -22,7 +22,10 @@ namespace bellatrix
             new Command("AT+SWATD=0", "Have information on this command? Visit the repo and submit a pull request with your changes to DefaultContent!"),
             new Command("AT+ACTIVATE=0,0,0", "Have information on this command? Visit the repo and submit a pull request with your changes to DefaultContent!"),
             new Command("AT+SWATD=1", "Have information on this command? Visit the repo and submit a pull request with your changes to DefaultContent!"),
-            new Command("AT+DEBUGLVC=0,5", "Have information on this command? Visit the repo and submit a pull request with your changes to DefaultContent!")
+            new Command("AT+DEBUGLVC=0,5", "Have information on this command? Visit the repo and submit a pull request with your changes to DefaultContent!"),
+            new Command("AT+SERIALNO", "Check Serial Number"),
+            new Command("AT+BATGETLEVEL?", "Check Battery Information"),
+            new Command("AT+IMEINUM", "Check IMEI Information")
         };
 
         public List<Script> DefaultScripts = new()

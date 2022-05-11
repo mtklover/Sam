@@ -212,10 +212,13 @@ namespace bellatrix
 
             if (!response.Contains("ERROR") && !response.Contains("Error"))
             {
-                BeginInvoke(new Action(() =>
+                if (!runningcommands.Contains(response))
                 {
-                    SuccessTextBox.AppendText($"Device: {respondingdevice.PortName}" + Environment.NewLine + response + Environment.NewLine);
-                }));
+                    BeginInvoke(new Action(() =>
+                    {
+                        SuccessTextBox.AppendText($"Device: {respondingdevice.PortName}" + Environment.NewLine + response + Environment.NewLine);
+                    }));
+                }
             }
 
             switch (response)
@@ -407,8 +410,13 @@ namespace bellatrix
             }
         }
 
+        List<string> runningcommands = new();
+
         private void RunScript(Device device)
         {
+            runningcommands = new();
+
+
             int scriptcount = ScriptCommandsDataGrid.Rows.Count;
 
             if (Parameter1.Checked)
@@ -441,6 +449,7 @@ namespace bellatrix
                 progressnum++;
                 progress.Report(percentComplete);
                 BeginInvoke(new Action(() => { CurrentCommandLabel.Text = $"Running {row.Cells["Instruction"].Value} \n {progressnum} / {scriptcount}"; }));
+                runningcommands.Add($"{row.Cells["Instruction"].Value}\r");
                 device.PortConnection.Write($"{row.Cells["Instruction"].Value}\r");
                 Thread.Sleep(Convert.ToInt32(row.Cells["Delay"].Value));
 
@@ -452,6 +461,7 @@ namespace bellatrix
                         progressnum++;
                         progress.Report(percentComplete);
                         BeginInvoke(new Action(() => { CurrentCommandLabel.Text = $"Running {row.Cells["Instruction"].Value}={i} \n {progressnum} / {scriptcount}"; }));
+                        runningcommands.Add($"{row.Cells["Instruction"].Value}={i}\r");
                         device.PortConnection.Write($"{row.Cells["Instruction"].Value}={i}\r\n");
                         Thread.Sleep(Convert.ToInt32(row.Cells["Delay"].Value));
                     }
@@ -467,6 +477,7 @@ namespace bellatrix
                             progressnum++;
                             progress.Report(percentComplete);
                             BeginInvoke(new Action(() => { CurrentCommandLabel.Text = $"Running {row.Cells["Instruction"].Value}={i},{x} \n {progressnum} / {scriptcount}"; }));
+                            runningcommands.Add($"{row.Cells["Instruction"].Value}={i},{x}\r");
                             device.PortConnection.Write($"{row.Cells["Instruction"].Value}={i},{x}\r\n");
                             Thread.Sleep(Convert.ToInt32(row.Cells["Delay"].Value));
                         }
@@ -485,6 +496,7 @@ namespace bellatrix
                                 progressnum++;
                                 progress.Report(percentComplete);
                                 BeginInvoke(new Action(() => { CurrentCommandLabel.Text = $"{row.Cells["Instruction"].Value}={i},{x},{l}"; }));
+                                runningcommands.Add($"{row.Cells["Instruction"].Value}={i},{x},{l}\r");
                                 device.PortConnection.Write($"{row.Cells["Instruction"].Value}={i},{x},{l}\r\n");
                                 Thread.Sleep(Convert.ToInt32(row.Cells["Delay"].Value));
                             }
@@ -586,18 +598,35 @@ namespace bellatrix
 
             foreach (var item in ImportTextBox.Lines)
             {
-                if (item.Contains("="))
+                if (CleanParametersCheckBox.Checked)
                 {
-                    string[] parts = item.Split("=");
-                    Command command = new($"{prefix}{parts[0]}", "Imported", Convert.ToInt32(delay));
-
-                    foreach (Script script in LoadedScripts)
+                    if (item.Contains("="))
                     {
-                        if (script.Name == ScriptTextBox.Text)
+                        string[] parts = item.Split("=");
+                        Command command = new($"{prefix}{parts[0]}", "Imported", Convert.ToInt32(delay));
+
+                        foreach (Script script in LoadedScripts)
                         {
-                            script.Commands.Add(command);
-                            ScriptCommandsDataGrid.DataSource = script.Commands;
-                            ScriptCommandsDataGrid.Refresh();
+                            if (script.Name == ScriptTextBox.Text)
+                            {
+                                script.Commands.Add(command);
+                                ScriptCommandsDataGrid.DataSource = script.Commands;
+                                ScriptCommandsDataGrid.Refresh();
+                            }
+                        }
+                    }
+                    else
+                    {
+                        Command command = new($"{prefix}{item}", "Imported", Convert.ToInt32(delay));
+
+                        foreach (Script script in LoadedScripts)
+                        {
+                            if (script.Name == ScriptTextBox.Text)
+                            {
+                                script.Commands.Add(command);
+                                ScriptCommandsDataGrid.DataSource = script.Commands;
+                                ScriptCommandsDataGrid.Refresh();
+                            }
                         }
                     }
                 }
@@ -616,6 +645,11 @@ namespace bellatrix
                     }
                 }
             }
+
+            PrefixTextBox.Text = "";
+            DelayTextBox.Text = "";
+            CleanParametersCheckBox.Checked = false;
+            ImportTextBox.Text = "";
         }
     }
 }
