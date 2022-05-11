@@ -427,6 +427,27 @@ namespace bellatrix
                 progress.Report(percentComplete);
                 device.PortConnection.Write($"{row.Cells["Instruction"].Value}\r");
                 Thread.Sleep(Convert.ToInt32(row.Cells["Delay"].Value));
+
+                if (Parameter1.Checked)
+                {
+                    for (int i = 0; i < 10; i++)
+                    {
+                        device.PortConnection.Write($"{row.Cells["Instruction"].Value}={i}\r\n");
+                        Thread.Sleep(Convert.ToInt32(row.Cells["Delay"].Value));
+                    }
+                }
+
+                if (Parameter2.Checked)
+                {
+                    for (int i = 0; i < 10; i++)
+                    {
+                        for (int x = 0; x < 10; x++)
+                        {
+                            device.PortConnection.Write($"{row.Cells["Instruction"].Value}={i},{x}\r\n");
+                            Thread.Sleep(Convert.ToInt32(row.Cells["Delay"].Value));
+                        }
+                    }
+                }
             }
             BeginInvoke(new Action(() => { ProgressBar.Value = 0; ScriptCommandsDataGrid.ClearSelection(); }));
         }
