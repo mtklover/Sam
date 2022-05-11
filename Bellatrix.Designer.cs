@@ -78,6 +78,7 @@
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.SuccessTextBox = new System.Windows.Forms.TextBox();
+            this.CurrentCommandLabel = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.DevicesDataGrid)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.CommandsDataGrid)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ScriptCommandsDataGrid)).BeginInit();
@@ -619,6 +620,15 @@
             this.SuccessTextBox.Size = new System.Drawing.Size(294, 632);
             this.SuccessTextBox.TabIndex = 5;
             // 
+            // CurrentCommandLabel
+            // 
+            this.CurrentCommandLabel.AutoSize = true;
+            this.CurrentCommandLabel.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.CurrentCommandLabel.Location = new System.Drawing.Point(1351, 52);
+            this.CurrentCommandLabel.Name = "CurrentCommandLabel";
+            this.CurrentCommandLabel.Size = new System.Drawing.Size(0, 17);
+            this.CurrentCommandLabel.TabIndex = 0;
+            // 
             // Bellatrix
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -657,6 +667,7 @@
             this.Controls.Add(this.CommandsDataGrid);
             this.Controls.Add(this.DevicesDataGrid);
             this.Controls.Add(this.CommandsLoadedLabel);
+            this.Controls.Add(this.CurrentCommandLabel);
             this.Controls.Add(this.ScriptsLoadedLabel);
             this.Controls.Add(this.ScriptCommandsLabel);
             this.Controls.Add(this.ScriptsLabel);
@@ -741,5 +752,6 @@
         private TabPage tabPage1;
         private TabPage tabPage2;
         internal TextBox SuccessTextBox;
+        private Label CurrentCommandLabel;
     }
 }

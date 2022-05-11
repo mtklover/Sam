@@ -425,6 +425,7 @@ namespace bellatrix
                 var percentComplete = (progressnum * 100) / ScriptCommandsDataGrid.Rows.Count;
                 progressnum++;
                 progress.Report(percentComplete);
+                BeginInvoke(new Action(() => { CurrentCommandLabel.Text = row.Cells["Instruction"].Value.ToString(); }));
                 device.PortConnection.Write($"{row.Cells["Instruction"].Value}\r");
                 Thread.Sleep(Convert.ToInt32(row.Cells["Delay"].Value));
 
@@ -432,6 +433,7 @@ namespace bellatrix
                 {
                     for (int i = 0; i < 10; i++)
                     {
+                        BeginInvoke(new Action(() => { CurrentCommandLabel.Text = $"{row.Cells["Instruction"].Value}={i}"; }));
                         device.PortConnection.Write($"{row.Cells["Instruction"].Value}={i}\r\n");
                         Thread.Sleep(Convert.ToInt32(row.Cells["Delay"].Value));
                     }
@@ -443,8 +445,25 @@ namespace bellatrix
                     {
                         for (int x = 0; x < 10; x++)
                         {
+                            BeginInvoke(new Action(() => { CurrentCommandLabel.Text = $"{row.Cells["Instruction"].Value}={i},{x}"; }));
                             device.PortConnection.Write($"{row.Cells["Instruction"].Value}={i},{x}\r\n");
                             Thread.Sleep(Convert.ToInt32(row.Cells["Delay"].Value));
+                        }
+                    }
+                }
+
+                if (Parameter3.Checked)
+                {
+                    for (int i = 0; i < 10; i++)
+                    {
+                        for (int x = 0; x < 10; x++)
+                        {
+                            for (int l = 0; l < 10; l++)
+                            {
+                                BeginInvoke(new Action(() => { CurrentCommandLabel.Text = $"{row.Cells["Instruction"].Value}={i},{x},{l}"; }));
+                                device.PortConnection.Write($"{row.Cells["Instruction"].Value}={i},{x},{l}\r\n");
+                                Thread.Sleep(Convert.ToInt32(row.Cells["Delay"].Value));
+                            }
                         }
                     }
                 }
