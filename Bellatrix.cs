@@ -208,8 +208,16 @@ namespace bellatrix
 
             BeginInvoke(new Action(() =>
             {
-                ConsoleTextBox.AppendText($"Device: {respondingdevice.PortName}" + Environment.NewLine + response);
+                ConsoleTextBox.AppendText($"Device: {respondingdevice.PortName}" + Environment.NewLine + response + Environment.NewLine);
             }));
+
+            if (!response.Contains("ERROR"))
+            {
+                BeginInvoke(new Action(() =>
+                {
+                    SuccessTextBox.AppendText($"Device: {respondingdevice.PortName}" + Environment.NewLine + response + Environment.NewLine);
+                }));
+            }
 
             switch (response)
             {

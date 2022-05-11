@@ -69,10 +69,22 @@
             this.AddCommandToScriptButton = new System.Windows.Forms.Button();
             this.SRTLabel = new System.Windows.Forms.Label();
             this.VersionLabel = new System.Windows.Forms.Label();
+            this.Parameter4 = new System.Windows.Forms.CheckBox();
+            this.Parameter3 = new System.Windows.Forms.CheckBox();
+            this.Parameter2 = new System.Windows.Forms.CheckBox();
+            this.Parameter1 = new System.Windows.Forms.CheckBox();
+            this.ParameterGenerationLabel = new System.Windows.Forms.Label();
+            this.TabControl = new System.Windows.Forms.TabControl();
+            this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.SuccessTextBox = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.DevicesDataGrid)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.CommandsDataGrid)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ScriptCommandsDataGrid)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ScriptsDataGrid)).BeginInit();
+            this.TabControl.SuspendLayout();
+            this.tabPage1.SuspendLayout();
+            this.tabPage2.SuspendLayout();
             this.SuspendLayout();
             // 
             // BellatrixLabel
@@ -373,12 +385,12 @@
             // 
             // ConsoleTextBox
             // 
-            this.ConsoleTextBox.Location = new System.Drawing.Point(1258, 79);
+            this.ConsoleTextBox.Location = new System.Drawing.Point(6, 6);
             this.ConsoleTextBox.Multiline = true;
             this.ConsoleTextBox.Name = "ConsoleTextBox";
             this.ConsoleTextBox.ReadOnly = true;
             this.ConsoleTextBox.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.ConsoleTextBox.Size = new System.Drawing.Size(314, 712);
+            this.ConsoleTextBox.Size = new System.Drawing.Size(294, 632);
             this.ConsoleTextBox.TabIndex = 4;
             // 
             // ConsoleLabel
@@ -431,7 +443,7 @@
             // 
             // ClearConsoleButton
             // 
-            this.ClearConsoleButton.Location = new System.Drawing.Point(1497, 50);
+            this.ClearConsoleButton.Location = new System.Drawing.Point(1497, 768);
             this.ClearConsoleButton.Name = "ClearConsoleButton";
             this.ClearConsoleButton.Size = new System.Drawing.Size(75, 23);
             this.ClearConsoleButton.TabIndex = 2;
@@ -516,15 +528,111 @@
             this.VersionLabel.TabIndex = 0;
             this.VersionLabel.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
+            // Parameter4
+            // 
+            this.Parameter4.AutoSize = true;
+            this.Parameter4.Location = new System.Drawing.Point(1372, 772);
+            this.Parameter4.Name = "Parameter4";
+            this.Parameter4.Size = new System.Drawing.Size(32, 19);
+            this.Parameter4.TabIndex = 7;
+            this.Parameter4.Text = "4";
+            this.Parameter4.UseVisualStyleBackColor = true;
+            // 
+            // Parameter3
+            // 
+            this.Parameter3.AutoSize = true;
+            this.Parameter3.Location = new System.Drawing.Point(1334, 772);
+            this.Parameter3.Name = "Parameter3";
+            this.Parameter3.Size = new System.Drawing.Size(32, 19);
+            this.Parameter3.TabIndex = 8;
+            this.Parameter3.Text = "3";
+            this.Parameter3.UseVisualStyleBackColor = true;
+            // 
+            // Parameter2
+            // 
+            this.Parameter2.AutoSize = true;
+            this.Parameter2.Location = new System.Drawing.Point(1296, 772);
+            this.Parameter2.Name = "Parameter2";
+            this.Parameter2.Size = new System.Drawing.Size(32, 19);
+            this.Parameter2.TabIndex = 9;
+            this.Parameter2.Text = "2";
+            this.Parameter2.UseVisualStyleBackColor = true;
+            // 
+            // Parameter1
+            // 
+            this.Parameter1.AutoSize = true;
+            this.Parameter1.Location = new System.Drawing.Point(1258, 772);
+            this.Parameter1.Name = "Parameter1";
+            this.Parameter1.Size = new System.Drawing.Size(32, 19);
+            this.Parameter1.TabIndex = 10;
+            this.Parameter1.Text = "1";
+            this.Parameter1.UseVisualStyleBackColor = true;
+            // 
+            // ParameterGenerationLabel
+            // 
+            this.ParameterGenerationLabel.AutoSize = true;
+            this.ParameterGenerationLabel.Location = new System.Drawing.Point(1258, 754);
+            this.ParameterGenerationLabel.Name = "ParameterGenerationLabel";
+            this.ParameterGenerationLabel.Size = new System.Drawing.Size(122, 15);
+            this.ParameterGenerationLabel.TabIndex = 6;
+            this.ParameterGenerationLabel.Text = "Parameter Generation";
+            // 
+            // TabControl
+            // 
+            this.TabControl.Controls.Add(this.tabPage1);
+            this.TabControl.Controls.Add(this.tabPage2);
+            this.TabControl.Location = new System.Drawing.Point(1258, 79);
+            this.TabControl.Name = "TabControl";
+            this.TabControl.SelectedIndex = 0;
+            this.TabControl.Size = new System.Drawing.Size(314, 672);
+            this.TabControl.TabIndex = 11;
+            // 
+            // tabPage1
+            // 
+            this.tabPage1.Controls.Add(this.ConsoleTextBox);
+            this.tabPage1.Location = new System.Drawing.Point(4, 24);
+            this.tabPage1.Name = "tabPage1";
+            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage1.Size = new System.Drawing.Size(306, 644);
+            this.tabPage1.TabIndex = 0;
+            this.tabPage1.Text = "Raw";
+            this.tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // tabPage2
+            // 
+            this.tabPage2.Controls.Add(this.SuccessTextBox);
+            this.tabPage2.Location = new System.Drawing.Point(4, 24);
+            this.tabPage2.Name = "tabPage2";
+            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage2.Size = new System.Drawing.Size(306, 644);
+            this.tabPage2.TabIndex = 1;
+            this.tabPage2.Text = "Success";
+            this.tabPage2.UseVisualStyleBackColor = true;
+            // 
+            // SuccessTextBox
+            // 
+            this.SuccessTextBox.Location = new System.Drawing.Point(6, 6);
+            this.SuccessTextBox.Multiline = true;
+            this.SuccessTextBox.Name = "SuccessTextBox";
+            this.SuccessTextBox.ReadOnly = true;
+            this.SuccessTextBox.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.SuccessTextBox.Size = new System.Drawing.Size(294, 632);
+            this.SuccessTextBox.TabIndex = 5;
+            // 
             // Bellatrix
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1584, 861);
+            this.Controls.Add(this.TabControl);
+            this.Controls.Add(this.Parameter4);
+            this.Controls.Add(this.Parameter3);
+            this.Controls.Add(this.Parameter2);
+            this.Controls.Add(this.Parameter1);
+            this.Controls.Add(this.ParameterGenerationLabel);
             this.Controls.Add(this.ProgressBar);
             this.Controls.Add(this.ScriptDescTextBox);
             this.Controls.Add(this.ScriptTextBox);
-            this.Controls.Add(this.ConsoleTextBox);
             this.Controls.Add(this.CommandDescTextBox);
             this.Controls.Add(this.CommandLineTextBox);
             this.Controls.Add(this.CommandTextBox);
@@ -571,6 +679,11 @@
             ((System.ComponentModel.ISupportInitialize)(this.CommandsDataGrid)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ScriptCommandsDataGrid)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ScriptsDataGrid)).EndInit();
+            this.TabControl.ResumeLayout(false);
+            this.tabPage1.ResumeLayout(false);
+            this.tabPage1.PerformLayout();
+            this.tabPage2.ResumeLayout(false);
+            this.tabPage2.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -619,5 +732,14 @@
         private Button AddCommandToScriptButton;
         private Label SRTLabel;
         private Label VersionLabel;
+        private CheckBox Parameter4;
+        private CheckBox Parameter3;
+        private CheckBox Parameter2;
+        private CheckBox Parameter1;
+        private Label ParameterGenerationLabel;
+        private TabControl TabControl;
+        private TabPage tabPage1;
+        private TabPage tabPage2;
+        internal TextBox SuccessTextBox;
     }
 }
