@@ -1,4 +1,3 @@
-using System;
 using System.IO.Ports;
 using System.Reflection;
 
@@ -211,7 +210,7 @@ namespace bellatrix
                 ConsoleTextBox.AppendText($"Device: {respondingdevice.PortName}" + Environment.NewLine + response + Environment.NewLine);
             }));
 
-            if (!response.Contains("ERROR"))
+            if (!response.Contains("ERROR") && !response.Contains("Error"))
             {
                 BeginInvoke(new Action(() =>
                 {
@@ -441,7 +440,7 @@ namespace bellatrix
                 var percentComplete = (progressnum * 100) / scriptcount;
                 progressnum++;
                 progress.Report(percentComplete);
-                BeginInvoke(new Action(() => { CurrentCommandLabel.Text = row.Cells["Instruction"].Value.ToString(); }));
+                BeginInvoke(new Action(() => { CurrentCommandLabel.Text = $"Running {row.Cells["Instruction"].Value} \n {progressnum} / {scriptcount}"; }));
                 device.PortConnection.Write($"{row.Cells["Instruction"].Value}\r");
                 Thread.Sleep(Convert.ToInt32(row.Cells["Delay"].Value));
 
@@ -452,7 +451,7 @@ namespace bellatrix
                         percentComplete = (progressnum * 100) / scriptcount;
                         progressnum++;
                         progress.Report(percentComplete);
-                        BeginInvoke(new Action(() => { CurrentCommandLabel.Text = $"{row.Cells["Instruction"].Value}={i}"; }));
+                        BeginInvoke(new Action(() => { CurrentCommandLabel.Text = $"Running {row.Cells["Instruction"].Value}={i} \n {progressnum} / {scriptcount}"; }));
                         device.PortConnection.Write($"{row.Cells["Instruction"].Value}={i}\r\n");
                         Thread.Sleep(Convert.ToInt32(row.Cells["Delay"].Value));
                     }
@@ -467,7 +466,7 @@ namespace bellatrix
                             percentComplete = (progressnum * 100) / scriptcount;
                             progressnum++;
                             progress.Report(percentComplete);
-                            BeginInvoke(new Action(() => { CurrentCommandLabel.Text = $"{row.Cells["Instruction"].Value}={i},{x}"; }));
+                            BeginInvoke(new Action(() => { CurrentCommandLabel.Text = $"Running {row.Cells["Instruction"].Value}={i},{x} \n {progressnum} / {scriptcount}"; }));
                             device.PortConnection.Write($"{row.Cells["Instruction"].Value}={i},{x}\r\n");
                             Thread.Sleep(Convert.ToInt32(row.Cells["Delay"].Value));
                         }
@@ -561,6 +560,55 @@ namespace bellatrix
                             Command tempcommand = command;
                             tempcommand.Delay = 1000;
 
+                            script.Commands.Add(command);
+                            ScriptCommandsDataGrid.DataSource = script.Commands;
+                            ScriptCommandsDataGrid.Refresh();
+                        }
+                    }
+                }
+            }
+        }
+
+        private void ImportButton_Click(object sender, EventArgs e)
+        {
+            string prefix = "";
+            string delay = "1000";
+
+            if (!string.IsNullOrWhiteSpace(PrefixTextBox.Text))
+            {
+                prefix = PrefixTextBox.Text;
+            }
+
+            if (!string.IsNullOrWhiteSpace(DelayTextBox.Text))
+            {
+                delay = DelayTextBox.Text;
+            }
+
+            foreach (var item in ImportTextBox.Lines)
+            {
+                if (item.Contains("="))
+                {
+                    string[] parts = item.Split("=");
+                    Command command = new($"{prefix}{parts[0]}", "Imported", Convert.ToInt32(delay));
+
+                    foreach (Script script in LoadedScripts)
+                    {
+                        if (script.Name == ScriptTextBox.Text)
+                        {
+                            script.Commands.Add(command);
+                            ScriptCommandsDataGrid.DataSource = script.Commands;
+                            ScriptCommandsDataGrid.Refresh();
+                        }
+                    }
+                }
+                else
+                {
+                    Command command = new($"{prefix}{item}", "Imported", Convert.ToInt32(delay));
+
+                    foreach (Script script in LoadedScripts)
+                    {
+                        if (script.Name == ScriptTextBox.Text)
+                        {
                             script.Commands.Add(command);
                             ScriptCommandsDataGrid.DataSource = script.Commands;
                             ScriptCommandsDataGrid.Refresh();

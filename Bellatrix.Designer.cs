@@ -74,18 +74,30 @@
             this.Parameter2 = new System.Windows.Forms.CheckBox();
             this.Parameter1 = new System.Windows.Forms.CheckBox();
             this.ParameterGenerationLabel = new System.Windows.Forms.Label();
-            this.TabControl = new System.Windows.Forms.TabControl();
+            this.ConsoleTabControl = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.SuccessTextBox = new System.Windows.Forms.TextBox();
             this.CurrentCommandLabel = new System.Windows.Forms.Label();
+            this.tabControl1 = new System.Windows.Forms.TabControl();
+            this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.tabPage4 = new System.Windows.Forms.TabPage();
+            this.ImportTextBox = new System.Windows.Forms.TextBox();
+            this.ImportButton = new System.Windows.Forms.Button();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
+            this.DelayTextBox = new System.Windows.Forms.TextBox();
+            this.PrefixTextBox = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.DevicesDataGrid)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.CommandsDataGrid)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ScriptCommandsDataGrid)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ScriptsDataGrid)).BeginInit();
-            this.TabControl.SuspendLayout();
+            this.ConsoleTabControl.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
+            this.tabControl1.SuspendLayout();
+            this.tabPage3.SuspendLayout();
+            this.tabPage4.SuspendLayout();
             this.SuspendLayout();
             // 
             // BellatrixLabel
@@ -255,14 +267,14 @@
             this.ScriptCommandsDataGrid.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.ScriptCommandsDataGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.ScriptCommandsDataGrid.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter;
-            this.ScriptCommandsDataGrid.Location = new System.Drawing.Point(708, 275);
+            this.ScriptCommandsDataGrid.Location = new System.Drawing.Point(6, 35);
             this.ScriptCommandsDataGrid.MultiSelect = false;
             this.ScriptCommandsDataGrid.Name = "ScriptCommandsDataGrid";
             this.ScriptCommandsDataGrid.RowHeadersVisible = false;
             this.ScriptCommandsDataGrid.RowTemplate.Height = 25;
             this.ScriptCommandsDataGrid.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.ScriptCommandsDataGrid.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.ScriptCommandsDataGrid.Size = new System.Drawing.Size(544, 545);
+            this.ScriptCommandsDataGrid.Size = new System.Drawing.Size(524, 476);
             this.ScriptCommandsDataGrid.TabIndex = 1;
             // 
             // ScriptCommandsLabel
@@ -461,7 +473,7 @@
             // 
             // DeleteScriptCommandButton
             // 
-            this.DeleteScriptCommandButton.Location = new System.Drawing.Point(1177, 246);
+            this.DeleteScriptCommandButton.Location = new System.Drawing.Point(455, 6);
             this.DeleteScriptCommandButton.Name = "DeleteScriptCommandButton";
             this.DeleteScriptCommandButton.Size = new System.Drawing.Size(75, 23);
             this.DeleteScriptCommandButton.TabIndex = 3;
@@ -471,7 +483,7 @@
             // 
             // AddScriptCommandButton
             // 
-            this.AddScriptCommandButton.Location = new System.Drawing.Point(1096, 245);
+            this.AddScriptCommandButton.Location = new System.Drawing.Point(374, 6);
             this.AddScriptCommandButton.Name = "AddScriptCommandButton";
             this.AddScriptCommandButton.Size = new System.Drawing.Size(75, 23);
             this.AddScriptCommandButton.TabIndex = 3;
@@ -578,15 +590,15 @@
             this.ParameterGenerationLabel.TabIndex = 6;
             this.ParameterGenerationLabel.Text = "Parameter Generation";
             // 
-            // TabControl
+            // ConsoleTabControl
             // 
-            this.TabControl.Controls.Add(this.tabPage1);
-            this.TabControl.Controls.Add(this.tabPage2);
-            this.TabControl.Location = new System.Drawing.Point(1258, 79);
-            this.TabControl.Name = "TabControl";
-            this.TabControl.SelectedIndex = 0;
-            this.TabControl.Size = new System.Drawing.Size(314, 672);
-            this.TabControl.TabIndex = 11;
+            this.ConsoleTabControl.Controls.Add(this.tabPage1);
+            this.ConsoleTabControl.Controls.Add(this.tabPage2);
+            this.ConsoleTabControl.Location = new System.Drawing.Point(1258, 79);
+            this.ConsoleTabControl.Name = "ConsoleTabControl";
+            this.ConsoleTabControl.SelectedIndex = 0;
+            this.ConsoleTabControl.Size = new System.Drawing.Size(314, 672);
+            this.ConsoleTabControl.TabIndex = 11;
             // 
             // tabPage1
             // 
@@ -624,17 +636,110 @@
             // 
             this.CurrentCommandLabel.AutoSize = true;
             this.CurrentCommandLabel.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.CurrentCommandLabel.Location = new System.Drawing.Point(1351, 52);
+            this.CurrentCommandLabel.Location = new System.Drawing.Point(1351, 42);
             this.CurrentCommandLabel.Name = "CurrentCommandLabel";
             this.CurrentCommandLabel.Size = new System.Drawing.Size(0, 17);
             this.CurrentCommandLabel.TabIndex = 0;
+            // 
+            // tabControl1
+            // 
+            this.tabControl1.Controls.Add(this.tabPage3);
+            this.tabControl1.Controls.Add(this.tabPage4);
+            this.tabControl1.Location = new System.Drawing.Point(708, 275);
+            this.tabControl1.Name = "tabControl1";
+            this.tabControl1.SelectedIndex = 0;
+            this.tabControl1.Size = new System.Drawing.Size(544, 545);
+            this.tabControl1.TabIndex = 12;
+            // 
+            // tabPage3
+            // 
+            this.tabPage3.Controls.Add(this.ScriptCommandsDataGrid);
+            this.tabPage3.Controls.Add(this.AddScriptCommandButton);
+            this.tabPage3.Controls.Add(this.DeleteScriptCommandButton);
+            this.tabPage3.Location = new System.Drawing.Point(4, 24);
+            this.tabPage3.Name = "tabPage3";
+            this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage3.Size = new System.Drawing.Size(536, 517);
+            this.tabPage3.TabIndex = 0;
+            this.tabPage3.Text = "Editor";
+            this.tabPage3.UseVisualStyleBackColor = true;
+            // 
+            // tabPage4
+            // 
+            this.tabPage4.Controls.Add(this.ImportTextBox);
+            this.tabPage4.Controls.Add(this.ImportButton);
+            this.tabPage4.Controls.Add(this.label2);
+            this.tabPage4.Controls.Add(this.label1);
+            this.tabPage4.Controls.Add(this.DelayTextBox);
+            this.tabPage4.Controls.Add(this.PrefixTextBox);
+            this.tabPage4.Location = new System.Drawing.Point(4, 24);
+            this.tabPage4.Name = "tabPage4";
+            this.tabPage4.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage4.Size = new System.Drawing.Size(536, 517);
+            this.tabPage4.TabIndex = 1;
+            this.tabPage4.Text = "Importer";
+            this.tabPage4.UseVisualStyleBackColor = true;
+            // 
+            // ImportTextBox
+            // 
+            this.ImportTextBox.Location = new System.Drawing.Point(6, 35);
+            this.ImportTextBox.Multiline = true;
+            this.ImportTextBox.Name = "ImportTextBox";
+            this.ImportTextBox.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.ImportTextBox.Size = new System.Drawing.Size(524, 476);
+            this.ImportTextBox.TabIndex = 4;
+            // 
+            // ImportButton
+            // 
+            this.ImportButton.Location = new System.Drawing.Point(455, 7);
+            this.ImportButton.Name = "ImportButton";
+            this.ImportButton.Size = new System.Drawing.Size(75, 23);
+            this.ImportButton.TabIndex = 3;
+            this.ImportButton.Text = "Import";
+            this.ImportButton.UseVisualStyleBackColor = true;
+            this.ImportButton.Click += new System.EventHandler(this.ImportButton_Click);
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.label2.Location = new System.Drawing.Point(135, 7);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(40, 17);
+            this.label2.TabIndex = 0;
+            this.label2.Text = "Delay";
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.label1.Location = new System.Drawing.Point(13, 7);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(40, 17);
+            this.label1.TabIndex = 0;
+            this.label1.Text = "Prefix";
+            // 
+            // DelayTextBox
+            // 
+            this.DelayTextBox.Location = new System.Drawing.Point(181, 6);
+            this.DelayTextBox.Name = "DelayTextBox";
+            this.DelayTextBox.Size = new System.Drawing.Size(70, 23);
+            this.DelayTextBox.TabIndex = 4;
+            // 
+            // PrefixTextBox
+            // 
+            this.PrefixTextBox.Location = new System.Drawing.Point(59, 6);
+            this.PrefixTextBox.Name = "PrefixTextBox";
+            this.PrefixTextBox.Size = new System.Drawing.Size(70, 23);
+            this.PrefixTextBox.TabIndex = 4;
             // 
             // Bellatrix
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1584, 861);
-            this.Controls.Add(this.TabControl);
+            this.Controls.Add(this.tabControl1);
+            this.Controls.Add(this.ConsoleTabControl);
             this.Controls.Add(this.Parameter4);
             this.Controls.Add(this.Parameter3);
             this.Controls.Add(this.Parameter2);
@@ -655,14 +760,11 @@
             this.Controls.Add(this.DeleteCommandButton);
             this.Controls.Add(this.NewScriptButton);
             this.Controls.Add(this.SendCommandButton);
-            this.Controls.Add(this.AddScriptCommandButton);
-            this.Controls.Add(this.DeleteScriptCommandButton);
             this.Controls.Add(this.RefreshScriptsButton);
             this.Controls.Add(this.RefreshCommandsButton);
             this.Controls.Add(this.NewCommandButton);
             this.Controls.Add(this.ClearConsoleButton);
             this.Controls.Add(this.RefreshDevicesButton);
-            this.Controls.Add(this.ScriptCommandsDataGrid);
             this.Controls.Add(this.ScriptsDataGrid);
             this.Controls.Add(this.CommandsDataGrid);
             this.Controls.Add(this.DevicesDataGrid);
@@ -690,11 +792,15 @@
             ((System.ComponentModel.ISupportInitialize)(this.CommandsDataGrid)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ScriptCommandsDataGrid)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ScriptsDataGrid)).EndInit();
-            this.TabControl.ResumeLayout(false);
+            this.ConsoleTabControl.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
             this.tabPage1.PerformLayout();
             this.tabPage2.ResumeLayout(false);
             this.tabPage2.PerformLayout();
+            this.tabControl1.ResumeLayout(false);
+            this.tabPage3.ResumeLayout(false);
+            this.tabPage4.ResumeLayout(false);
+            this.tabPage4.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -748,10 +854,19 @@
         private CheckBox Parameter2;
         private CheckBox Parameter1;
         private Label ParameterGenerationLabel;
-        private TabControl TabControl;
+        private TabControl ConsoleTabControl;
         private TabPage tabPage1;
         private TabPage tabPage2;
         internal TextBox SuccessTextBox;
         private Label CurrentCommandLabel;
+        private TabControl tabControl1;
+        private TabPage tabPage3;
+        private TabPage tabPage4;
+        private TextBox ImportTextBox;
+        private Button ImportButton;
+        private Label label2;
+        private Label label1;
+        private TextBox DelayTextBox;
+        private TextBox PrefixTextBox;
     }
 }
