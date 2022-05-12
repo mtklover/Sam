@@ -448,7 +448,8 @@ namespace bellatrix
                 var percentComplete = (progressnum * 100) / scriptcount;
                 progressnum++;
                 progress.Report(percentComplete);
-                BeginInvoke(new Action(() => { CurrentCommandLabel.Text = $"Running {row.Cells["Instruction"].Value} \n {progressnum} / {scriptcount}"; }));
+                BeginInvoke(new Action(() => { CurrentCommandLabel.Text = $"Running {row.Cells["Instruction"].Value}"; }));
+                BeginInvoke(new Action(() => { CurrentCountLabel.Text = $"{progressnum} / {scriptcount}"; }));
                 runningcommands.Add($"{row.Cells["Instruction"].Value}\r");
                 device.PortConnection.Write($"{row.Cells["Instruction"].Value}\r");
                 Thread.Sleep(Convert.ToInt32(row.Cells["Delay"].Value));
@@ -460,7 +461,8 @@ namespace bellatrix
                         percentComplete = (progressnum * 100) / scriptcount;
                         progressnum++;
                         progress.Report(percentComplete);
-                        BeginInvoke(new Action(() => { CurrentCommandLabel.Text = $"Running {row.Cells["Instruction"].Value}={i} \n {progressnum} / {scriptcount}"; }));
+                        BeginInvoke(new Action(() => { CurrentCommandLabel.Text = $"Running {row.Cells["Instruction"].Value}={i}"; }));
+                        BeginInvoke(new Action(() => { CurrentCountLabel.Text = $"{progressnum} / {scriptcount}"; }));
                         runningcommands.Add($"{row.Cells["Instruction"].Value}={i}\r");
                         device.PortConnection.Write($"{row.Cells["Instruction"].Value}={i}\r\n");
                         Thread.Sleep(Convert.ToInt32(row.Cells["Delay"].Value));
@@ -476,7 +478,8 @@ namespace bellatrix
                             percentComplete = (progressnum * 100) / scriptcount;
                             progressnum++;
                             progress.Report(percentComplete);
-                            BeginInvoke(new Action(() => { CurrentCommandLabel.Text = $"Running {row.Cells["Instruction"].Value}={i},{x} \n {progressnum} / {scriptcount}"; }));
+                            BeginInvoke(new Action(() => { CurrentCommandLabel.Text = $"Running {row.Cells["Instruction"].Value}={i},{x}"; }));
+                            BeginInvoke(new Action(() => { CurrentCountLabel.Text = $"{progressnum} / {scriptcount}"; }));
                             runningcommands.Add($"{row.Cells["Instruction"].Value}={i},{x}\r");
                             device.PortConnection.Write($"{row.Cells["Instruction"].Value}={i},{x}\r\n");
                             Thread.Sleep(Convert.ToInt32(row.Cells["Delay"].Value));
@@ -496,6 +499,7 @@ namespace bellatrix
                                 progressnum++;
                                 progress.Report(percentComplete);
                                 BeginInvoke(new Action(() => { CurrentCommandLabel.Text = $"{row.Cells["Instruction"].Value}={i},{x},{l}"; }));
+                                BeginInvoke(new Action(() => { CurrentCountLabel.Text = $"{progressnum} / {scriptcount}"; }));
                                 runningcommands.Add($"{row.Cells["Instruction"].Value}={i},{x},{l}\r");
                                 device.PortConnection.Write($"{row.Cells["Instruction"].Value}={i},{x},{l}\r\n");
                                 Thread.Sleep(Convert.ToInt32(row.Cells["Delay"].Value));
@@ -506,6 +510,7 @@ namespace bellatrix
             }
             BeginInvoke(new Action(() => { ProgressBar.Value = 0; ScriptCommandsDataGrid.ClearSelection(); }));
             BeginInvoke(new Action(() => { CurrentCommandLabel.Text = $""; }));
+            BeginInvoke(new Action(() => { CurrentCountLabel.Text = $""; }));
         }
 
         private void ClearConsoleButton_Click(object sender, EventArgs e)
@@ -650,6 +655,11 @@ namespace bellatrix
             DelayTextBox.Text = "";
             CleanParametersCheckBox.Checked = false;
             ImportTextBox.Text = "";
+        }
+
+        private void ClearSuccessButton_Click(object sender, EventArgs e)
+        {
+            SuccessTextBox.Text = null;
         }
     }
 }

@@ -78,6 +78,7 @@
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.SuccessTextBox = new System.Windows.Forms.TextBox();
+            this.ClearSuccessButton = new System.Windows.Forms.Button();
             this.CurrentCommandLabel = new System.Windows.Forms.Label();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage3 = new System.Windows.Forms.TabPage();
@@ -89,6 +90,7 @@
             this.label1 = new System.Windows.Forms.Label();
             this.DelayTextBox = new System.Windows.Forms.TextBox();
             this.PrefixTextBox = new System.Windows.Forms.TextBox();
+            this.CurrentCountLabel = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.DevicesDataGrid)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.CommandsDataGrid)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ScriptCommandsDataGrid)).BeginInit();
@@ -399,12 +401,12 @@
             // 
             // ConsoleTextBox
             // 
-            this.ConsoleTextBox.Location = new System.Drawing.Point(6, 6);
+            this.ConsoleTextBox.Location = new System.Drawing.Point(6, 35);
             this.ConsoleTextBox.Multiline = true;
             this.ConsoleTextBox.Name = "ConsoleTextBox";
             this.ConsoleTextBox.ReadOnly = true;
             this.ConsoleTextBox.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.ConsoleTextBox.Size = new System.Drawing.Size(294, 632);
+            this.ConsoleTextBox.Size = new System.Drawing.Size(294, 603);
             this.ConsoleTextBox.TabIndex = 4;
             // 
             // ConsoleLabel
@@ -457,7 +459,7 @@
             // 
             // ClearConsoleButton
             // 
-            this.ClearConsoleButton.Location = new System.Drawing.Point(1497, 768);
+            this.ClearConsoleButton.Location = new System.Drawing.Point(225, 6);
             this.ClearConsoleButton.Name = "ClearConsoleButton";
             this.ClearConsoleButton.Size = new System.Drawing.Size(75, 23);
             this.ClearConsoleButton.TabIndex = 2;
@@ -604,6 +606,7 @@
             // tabPage1
             // 
             this.tabPage1.Controls.Add(this.ConsoleTextBox);
+            this.tabPage1.Controls.Add(this.ClearConsoleButton);
             this.tabPage1.Location = new System.Drawing.Point(4, 24);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
@@ -615,6 +618,7 @@
             // tabPage2
             // 
             this.tabPage2.Controls.Add(this.SuccessTextBox);
+            this.tabPage2.Controls.Add(this.ClearSuccessButton);
             this.tabPage2.Location = new System.Drawing.Point(4, 24);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
@@ -625,13 +629,23 @@
             // 
             // SuccessTextBox
             // 
-            this.SuccessTextBox.Location = new System.Drawing.Point(6, 6);
+            this.SuccessTextBox.Location = new System.Drawing.Point(6, 35);
             this.SuccessTextBox.Multiline = true;
             this.SuccessTextBox.Name = "SuccessTextBox";
             this.SuccessTextBox.ReadOnly = true;
             this.SuccessTextBox.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.SuccessTextBox.Size = new System.Drawing.Size(294, 632);
+            this.SuccessTextBox.Size = new System.Drawing.Size(294, 603);
             this.SuccessTextBox.TabIndex = 5;
+            // 
+            // ClearSuccessButton
+            // 
+            this.ClearSuccessButton.Location = new System.Drawing.Point(225, 6);
+            this.ClearSuccessButton.Name = "ClearSuccessButton";
+            this.ClearSuccessButton.Size = new System.Drawing.Size(75, 23);
+            this.ClearSuccessButton.TabIndex = 2;
+            this.ClearSuccessButton.Text = "Clear";
+            this.ClearSuccessButton.UseVisualStyleBackColor = true;
+            this.ClearSuccessButton.Click += new System.EventHandler(this.ClearSuccessButton_Click);
             // 
             // CurrentCommandLabel
             // 
@@ -745,6 +759,15 @@
             this.PrefixTextBox.Size = new System.Drawing.Size(70, 23);
             this.PrefixTextBox.TabIndex = 4;
             // 
+            // CurrentCountLabel
+            // 
+            this.CurrentCountLabel.AutoSize = true;
+            this.CurrentCountLabel.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.CurrentCountLabel.Location = new System.Drawing.Point(1351, 59);
+            this.CurrentCountLabel.Name = "CurrentCountLabel";
+            this.CurrentCountLabel.Size = new System.Drawing.Size(0, 17);
+            this.CurrentCountLabel.TabIndex = 0;
+            // 
             // Bellatrix
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -775,12 +798,12 @@
             this.Controls.Add(this.RefreshScriptsButton);
             this.Controls.Add(this.RefreshCommandsButton);
             this.Controls.Add(this.NewCommandButton);
-            this.Controls.Add(this.ClearConsoleButton);
             this.Controls.Add(this.RefreshDevicesButton);
             this.Controls.Add(this.ScriptsDataGrid);
             this.Controls.Add(this.CommandsDataGrid);
             this.Controls.Add(this.DevicesDataGrid);
             this.Controls.Add(this.CommandsLoadedLabel);
+            this.Controls.Add(this.CurrentCountLabel);
             this.Controls.Add(this.CurrentCommandLabel);
             this.Controls.Add(this.ScriptsLoadedLabel);
             this.Controls.Add(this.ScriptCommandsLabel);
@@ -881,5 +904,7 @@
         private TextBox DelayTextBox;
         private TextBox PrefixTextBox;
         private CheckBox CleanParametersCheckBox;
+        private Button ClearSuccessButton;
+        private Label CurrentCountLabel;
     }
 }
