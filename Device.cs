@@ -24,6 +24,7 @@ namespace bellatrix
         {
             PortName = portname;
             PortConnection = new(portname);
+            PortConnection.BaudRate = 115200;
             PortConnection.DataReceived += bellatrix.HandleResponse;
         }
     }
