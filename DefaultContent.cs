@@ -26,7 +26,40 @@ namespace bellatrix
             new Command("AT+SERIALNO", "Check Serial Number"),
             new Command("AT+BATGETLEVEL?", "Check Battery Information"),
             new Command("AT+IMEINUM", "Check IMEI Information"),
-            new Command("AT+SWVER", "Check Software Information")
+            new Command("AT+SWVER", "Check Software Information"),
+
+            // AOS 9 ADB Prompt Commands
+
+            // AOS 9
+            new Command("AT+CTSA=2,750,1300", "SM-G950U AOS-9 ADB Prompt"),
+
+            // AOS 10
+            new Command("AT+CTSA=2,600,2100", "SM-G781U AOS-10 ADB Prompt"),
+            new Command("AT+CTSA=2,600,2100", "SM-G981U AOS-10 ADB Prompt"),
+            new Command("AT+CTSA=2,700,2100", "SM-G986U AOS-10 ADB Prompt"),
+            new Command("AT+CTSA=2,800,2125", "SM-N986U AOS-10 ADB Prompt"),
+            new Command("AT+CTSA=2,700,2100", "SM-G988U AOS-10 ADB Prompt"),
+
+            // AOS 11
+            new Command("AT+CTSA=2,600,2100", "SM-G781U AOS-11 ADB Prompt"),
+            new Command("AT+CTSA=2,600,2100", "SM-G981U AOS-11 ADB Prompt"),
+            new Command("AT+CTSA=2,700,2100", "SM-G986U AOS-11 ADB Prompt"),
+            new Command("AT+CTSA=2,800,2125", "SM-N986U AOS-11 ADB Prompt"),
+            new Command("AT+CTSA=2,700,2100", "SM-G988U AOS-11 ADB Prompt"),
+            new Command("AT+CTSA=2,600,2100", "SM-G991U AOS-11 ADB Prompt"),
+            new Command("AT+CTSA=2,700,2100", "SM-G996U AOS-11 ADB Prompt"),
+            new Command("AT+CTSA=2,700,2100", "SM-G998U AOS-11 ADB Prompt"),
+
+            // AOS 12
+            new Command("AT+CTSA=2,600,2100", "SM-G781U AOS-12 ADB Prompt"),
+            new Command("AT+CTSA=2,600,2100", "SM-G981U AOS-12 ADB Prompt"),
+            new Command("AT+CTSA=2,700,2100", "SM-G986U AOS-12 ADB Prompt"),
+            new Command("AT+CTSA=2,800,2125", "SM-N986U AOS-12 ADB Prompt"),
+            new Command("AT+CTSA=2,700,2100", "SM-G988U AOS-12 ADB Prompt"),
+            new Command("AT+CTSA=2,600,2100", "SM-G991U AOS-12 ADB Prompt"),
+            new Command("AT+CTSA=2,700,2100", "SM-G996U AOS-12 ADB Prompt"),
+            new Command("AT+CTSA=2,700,2100", "SM-G998U AOS-12 ADB Prompt"),
+
         };
 
         public List<Script> DefaultScripts = new()
@@ -56,6 +89,14 @@ namespace bellatrix
                     new Command("AT+SWATD=1", "?", 5000),
                     new Command("AT+DEBUGLVC=0,5", "?", 5000)
                 }),
+
+            // AOS 9 Dialer Touch Scripts
+
+            new Script("", "",
+                new BindingList<Command>
+                {
+                    new Command("", "", 0)
+                })
         };
     }
 }
