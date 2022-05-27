@@ -83,7 +83,7 @@ namespace bellatrix
 
             // unsure how to handle this warning
             XElement node = (from x in document.Descendants("Command")
-                             where x.Element("Instruction").Value == command.Instruction
+                             where x.Element("Instruction").Value == command.Instruction && x.Element("Description").Value == command.Description
                              select x).FirstOrDefault();
 
             if (node != null)
